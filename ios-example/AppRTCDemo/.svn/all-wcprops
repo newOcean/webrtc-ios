@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo
+END
+APPRTCViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/APPRTCViewController.h
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/main.m
+END
+APPRTCAppClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/APPRTCAppClient.h
+END
+GAEChannelClient.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/GAEChannelClient.m
+END
+APPRTCAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/APPRTCAppDelegate.m
+END
+AppRTCDemo-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/AppRTCDemo-Info.plist
+END
+AppRTCDemo-Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/AppRTCDemo-Prefix.pch
+END
+APPRTCViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/APPRTCViewController.m
+END
+APPRTCAppClient.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/APPRTCAppClient.m
+END
+ios_channel.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/ios_channel.html
+END
+Default.png
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/Default.png
+END
+GAEChannelClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/GAEChannelClient.h
+END
+APPRTCAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/325/trunk/talk/examples/ios/AppRTCDemo/APPRTCAppDelegate.h
+END

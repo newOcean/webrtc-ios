@@ -1,0 +1,22 @@
+webrtc demo on ios platform.
+
+There is so many people interested in webrtc, But nobody give a completely builded project on ios. 
+It has taken me a long time to build entire webrtc project, so I would like to share this APPRTCDemo, just for your test. 
+BTW,video is disabled ^-^, and only for iPhone device, simulator is not available yet, nevertheless I will work on it.
+
+
+useage:
+- Open AppRTCDemo.xcodeproj, select your device or simulator and run.
+- If you have any problems deploying for the first time, check the project
+  properties to ensure that the Bundle Identifier matches your phone
+  provisioning profile.  Or use the simulator as it doesn't require a profile.
+
+- In desktop chrome, navigate to http://apprtc.appspot.com and note the r=<NNN>
+  room number in the resulting URL.
+
+- Enter that number into the text field on the phone.
+
+- Alternatively, you can background the app and launch Safari.  In Safari, open
+  the url apprtc://apprtc.appspot.com/?r=<NNN> where <NNN> is the room name.
+  Other options are to put the link in an email and send it to your self.
+  Clicking on it will launch AppRTCDemo and navigate to the room.
