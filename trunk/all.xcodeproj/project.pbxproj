@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		D95ADB02FE982347C7965145 /* All */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F0E02F47130C9ABE67D4044A /* Build configuration list for PBXAggregateTarget "All" */;
+			buildPhases = (
+			);
+			dependencies = (
+				5F9455A0688D0CF2E6CAE4E9 /* PBXTargetDependency */,
+				B3F79FE109734EB32CABF89E /* PBXTargetDependency */,
+				698E55EB07ECC3452017F6F5 /* PBXTargetDependency */,
+				26B781F755C954195FA87806 /* PBXTargetDependency */,
+				8BE4211D4F0D8348A3CF4278 /* PBXTargetDependency */,
+				BB5F2D4D57E5BBAFECB92827 /* PBXTargetDependency */,
+				4A7484C4B8272DBFB4664992 /* PBXTargetDependency */,
+				DCA274E6B057D10507B32D5C /* PBXTargetDependency */,
+				C9DA66302920EE20900501CD /* PBXTargetDependency */,
+			);
+			name = All;
+			productName = All;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		04429DAF1BBC531C5653C7EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B057E68A29C95E7056995EF4;
+			remoteInfo = libjingle_p2p;
+		};
+		0E2954762587D8582CB49EBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 782E8193107BB38F530E75A6;
+			remoteInfo = libjingle_p2p;
+		};
+		0EFCF0A4EBD7244AAEA21DDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DD2F264A93D7B6AE8B8E2A5A;
+			remoteInfo = libjingle;
+		};
+		21AC2CC126ED65A5909150EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 61BBBB4D8DD5B8DC5AED1DA7;
+			remoteInfo = AppRTCDemo;
+		};
+		423467E7B82316122B5F07C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A62084D1222E1D227138789B;
+			remoteInfo = AppRTCDemo;
+		};
+		5368A4025720EB003155C585 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BDE4DC25DE77F07A66426A0;
+			remoteInfo = libjingle_peerconnection_objc;
+		};
+		7743203258187FBF7035D972 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FE4A329A968ED177A5F36A94;
+			remoteInfo = libjingle_peerconnection_objc;
+		};
+		7CB94A1DC144F318FF686A04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 47E6A9F577E94FA216CE28CA;
+			remoteInfo = libjingle_sound;
+		};
+		7D9664CEA0D8F452E7AE9324 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C551A430E660D107410A99D7 /* webrtc.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 96F845AE490D298A8B11AD82;
+			remoteInfo = webrtc;
+		};
+		B10D8D3462C3DF6B70BE3438 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 257F04038E0DD4F06DF162F0;
+			remoteInfo = libjingle_xmpphelp;
+		};
+		BE2418D9817079208227EB7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FBB32061B4704DEEE6D0A27;
+			remoteInfo = libjingle_media;
+		};
+		C2C47410A0B1FCF1039C1A66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8A61C59C3901E342228BAC3;
+			remoteInfo = libjingle_xmpphelp;
+		};
+		C512A3262053230E34320BB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A5819C3A2AFACB096EE0792;
+			remoteInfo = libjingle_peerconnection;
+		};
+		CD6E64FBBE0BD49287EC76A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7D34FDDA2772ABE2EF2271E5;
+			remoteInfo = libjingle;
+		};
+		DA84B930206B128D89A5C5D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 91D4A883993827B392378112;
+			remoteInfo = libjingle_peerconnection;
+		};
+		E1B896F3A17E5BD5FC38BA57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9D043850409B276F84991F89;
+			remoteInfo = libjingle_sound;
+		};
+		E2B04A447ACAF625C96BED50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9AB911C6516CF42259374DBF;
+			remoteInfo = libjingle_media;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libjingle.xcodeproj; path = talk/libjingle.xcodeproj; sourceTree = SOURCE_ROOT; };
+		12097FD4013457C1F00DE74E /* release_defaults.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = release_defaults.gypi; path = build/internal/release_defaults.gypi; sourceTree = "<group>"; };
+		2727A6C55A8DFD018037554A /* supplement.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = supplement.gypi; path = webrtc/supplement.gypi; sourceTree = "<group>"; };
+		2AE07737C85E702D08C522B3 /* all.gyp */ = {isa = PBXFileReference; lastKnownFileType = text; path = all.gyp; sourceTree = "<group>"; };
+		3B850B1FC84B381DE28921FE /* release.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = release.gypi; path = build/release.gypi; sourceTree = "<group>"; };
+		5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libjingle_examples.xcodeproj; path = talk/libjingle_examples.xcodeproj; sourceTree = SOURCE_ROOT; };
+		7FCBB7170AD5206714B882D0 /* release_impl_official.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = release_impl_official.gypi; path = build/internal/release_impl_official.gypi; sourceTree = "<group>"; };
+		8CAC934BC054C13325FF43AD /* filename_rules.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = filename_rules.gypi; path = build/filename_rules.gypi; sourceTree = "<group>"; };
+		9625D5160309C0FA01B40D1E /* common.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = common.gypi; path = build/common.gypi; sourceTree = "<group>"; };
+		A61AEB7049C01D3244AE0921 /* release_impl.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = release_impl.gypi; path = build/internal/release_impl.gypi; sourceTree = "<group>"; };
+		C551A430E660D107410A99D7 /* webrtc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = webrtc.xcodeproj; path = webrtc/webrtc.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E849DE384DE24B7E5D60DE83 /* common.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; name = common.gypi; path = talk/build/common.gypi; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		15418EF62149AAFC4FB12C4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE05594983C23EB3F7026951 /* libjingle.a */,
+				AADCF5DD6CDF6B03CA5E86B0 /* libjingle_sound.a */,
+				DF68C047E75D16BE1FD44E2B /* libjingle_media.a */,
+				E7C9C3F87997360B9BDB7602 /* libjingle_p2p.a */,
+				CF906C48D5B545A44651E97A /* libjingle_peerconnection.a */,
+				8B131AEF90DACA68094A7E27 /* libjingle_peerconnection_objc.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6AF0696877EBB07DD79AB668 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72FC1B8155D0A127C513116E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DDCA77033E11B050E950E94 /* libjingle_xmpphelp.a */,
+				821D46D4815276D1710A7E8E /* AppRTCDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		88ACB7EAB46F9029FA9BEFDD = {
+			isa = PBXGroup;
+			children = (
+				F434818B5D8FF2C2A01780E6 /* Projects */,
+				C16C122101A5B13F7A74E2CA /* Build */,
+			);
+			sourceTree = "<group>";
+		};
+		C16C122101A5B13F7A74E2CA /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				2AE07737C85E702D08C522B3 /* all.gyp */,
+				9625D5160309C0FA01B40D1E /* common.gypi */,
+				E849DE384DE24B7E5D60DE83 /* common.gypi */,
+				8CAC934BC054C13325FF43AD /* filename_rules.gypi */,
+				3B850B1FC84B381DE28921FE /* release.gypi */,
+				12097FD4013457C1F00DE74E /* release_defaults.gypi */,
+				A61AEB7049C01D3244AE0921 /* release_impl.gypi */,
+				7FCBB7170AD5206714B882D0 /* release_impl_official.gypi */,
+				2727A6C55A8DFD018037554A /* supplement.gypi */,
+			);
+			name = Build;
+			sourceTree = "<group>";
+		};
+		F434818B5D8FF2C2A01780E6 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */,
+				5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */,
+				C551A430E660D107410A99D7 /* webrtc.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		07F667ABBAC8347BCE0D653A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 5953671EE5E9D932BEFB7B03 /* Build configuration list for PBXProject "all" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 88ACB7EAB46F9029FA9BEFDD;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 15418EF62149AAFC4FB12C4E /* Products */;
+					ProjectRef = 0BC90412DC0A1EE374D2FF13 /* libjingle.xcodeproj */;
+				},
+				{
+					ProductGroup = 72FC1B8155D0A127C513116E /* Products */;
+					ProjectRef = 5D515F31F3B83D94AD2E8A3C /* libjingle_examples.xcodeproj */;
+				},
+				{
+					ProductGroup = 6AF0696877EBB07DD79AB668 /* Products */;
+					ProjectRef = C551A430E660D107410A99D7 /* webrtc.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				D95ADB02FE982347C7965145 /* All */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6DDCA77033E11B050E950E94 /* libjingle_xmpphelp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle_xmpphelp.a;
+			remoteRef = C2C47410A0B1FCF1039C1A66 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		821D46D4815276D1710A7E8E /* AppRTCDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = AppRTCDemo.app;
+			remoteRef = 21AC2CC126ED65A5909150EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8B131AEF90DACA68094A7E27 /* libjingle_peerconnection_objc.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle_peerconnection_objc.a;
+			remoteRef = 7743203258187FBF7035D972 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AADCF5DD6CDF6B03CA5E86B0 /* libjingle_sound.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle_sound.a;
+			remoteRef = E1B896F3A17E5BD5FC38BA57 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CF906C48D5B545A44651E97A /* libjingle_peerconnection.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle_peerconnection.a;
+			remoteRef = DA84B930206B128D89A5C5D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DF68C047E75D16BE1FD44E2B /* libjingle_media.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle_media.a;
+			remoteRef = E2B04A447ACAF625C96BED50 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E7C9C3F87997360B9BDB7602 /* libjingle_p2p.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle_p2p.a;
+			remoteRef = 04429DAF1BBC531C5653C7EF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE05594983C23EB3F7026951 /* libjingle.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjingle.a;
+			remoteRef = CD6E64FBBE0BD49287EC76A7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		26B781F755C954195FA87806 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle_media;
+			targetProxy = BE2418D9817079208227EB7F /* PBXContainerItemProxy */;
+		};
+		4A7484C4B8272DBFB4664992 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle_peerconnection_objc;
+			targetProxy = 5368A4025720EB003155C585 /* PBXContainerItemProxy */;
+		};
+		5F9455A0688D0CF2E6CAE4E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = webrtc;
+			targetProxy = 7D9664CEA0D8F452E7AE9324 /* PBXContainerItemProxy */;
+		};
+		698E55EB07ECC3452017F6F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle_sound;
+			targetProxy = 7CB94A1DC144F318FF686A04 /* PBXContainerItemProxy */;
+		};
+		8BE4211D4F0D8348A3CF4278 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle_p2p;
+			targetProxy = 0E2954762587D8582CB49EBF /* PBXContainerItemProxy */;
+		};
+		B3F79FE109734EB32CABF89E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle;
+			targetProxy = 0EFCF0A4EBD7244AAEA21DDF /* PBXContainerItemProxy */;
+		};
+		BB5F2D4D57E5BBAFECB92827 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle_peerconnection;
+			targetProxy = C512A3262053230E34320BB5 /* PBXContainerItemProxy */;
+		};
+		C9DA66302920EE20900501CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppRTCDemo;
+			targetProxy = 423467E7B82316122B5F07C5 /* PBXContainerItemProxy */;
+		};
+		DCA274E6B057D10507B32D5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libjingle_xmpphelp;
+			targetProxy = B10D8D3462C3DF6B70BE3438 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		229D6A07D2DDAD475989C29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = i386;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CLANG_WARN_CXX0X_EXTENSIONS = NO;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					ANGLE_DX11,
+					EXPAT_RELATIVE_PATH,
+					FEATURE_ENABLE_VOICEMAIL,
+					GTEST_RELATIVE_PATH,
+					JSONCPP_RELATIVE_PATH,
+					"LOGGING=1",
+					SRTP_RELATIVE_PATH,
+					FEATURE_ENABLE_SSL,
+					FEATURE_ENABLE_PSTN,
+					HAVE_SRTP,
+					HAVE_WEBRTC_VIDEO,
+					HAVE_WEBRTC_VOICE,
+					USE_WEBRTC_DEV_BRANCH,
+					DISABLE_NACL,
+					CHROMIUM_BUILD,
+					ENABLE_INPUT_SPEECH,
+					"ENABLE_EGLIMAGE=1",
+					"ENABLE_SPELLCHECK=1",
+					"DISABLE_FTP_SUPPORT=1",
+					"LIBPEERCONNECTION_LIB=1",
+					IOS,
+					"HAVE_NSS_SSL_H=1",
+					SSL_USE_NSS_RNG,
+					"CARBON_DEPRECATED=YES",
+					"HASH_NAMESPACE=__gnu_cxx",
+					POSIX,
+					DISABLE_DYNAMIC_CAST,
+					_REENTRANT,
+					WEBRTC_MAC,
+					WEBRTC_IOS,
+					XML_STATIC,
+					"DYNAMIC_ANNOTATIONS_ENABLED=1",
+					"WTF_USE_DYNAMIC_ANNOTATIONS=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				HEADER_SEARCH_PATHS = (
+					.,
+					third_party,
+					third_party/webrtc,
+					webrtc,
+					third_party/expat/files/lib,
+					third_party/jsoncpp/overrides/include/,
+					third_party/jsoncpp/source/include/,
+					third_party/libyuv/include,
+					testing/gtest/include,
+					talk/app/webrtc/objc/public,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-Wl,-search_paths_first";
+				PRODUCT_NAME = All;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wendif-labels",
+					"-Wno-unused-parameter",
+					"-Wno-missing-field-initializers",
+					"-Wheader-hygiene",
+					"-Wno-char-subscripts",
+					"-Wno-unused-function",
+					"-Wno-unnamed-type-template-args",
+					"-Wno-c++11-narrowing",
+				);
+				WARNING_CFLAGS_excluded = (
+					"-Wall",
+					"-Wextra",
+				);
+			};
+			name = Debug;
+		};
+		47305E3C9C5C93CCA81183D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = i386;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CLANG_WARN_CXX0X_EXTENSIONS = NO;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_CW_ASM_SYNTAX = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					ANGLE_DX11,
+					EXPAT_RELATIVE_PATH,
+					FEATURE_ENABLE_VOICEMAIL,
+					GTEST_RELATIVE_PATH,
+					JSONCPP_RELATIVE_PATH,
+					"LOGGING=1",
+					SRTP_RELATIVE_PATH,
+					FEATURE_ENABLE_SSL,
+					FEATURE_ENABLE_PSTN,
+					HAVE_SRTP,
+					HAVE_WEBRTC_VIDEO,
+					HAVE_WEBRTC_VOICE,
+					USE_WEBRTC_DEV_BRANCH,
+					DISABLE_NACL,
+					CHROMIUM_BUILD,
+					ENABLE_INPUT_SPEECH,
+					"ENABLE_EGLIMAGE=1",
+					"ENABLE_SPELLCHECK=1",
+					"DISABLE_FTP_SUPPORT=1",
+					"LIBPEERCONNECTION_LIB=1",
+					IOS,
+					"HAVE_NSS_SSL_H=1",
+					SSL_USE_NSS_RNG,
+					"CARBON_DEPRECATED=YES",
+					"HASH_NAMESPACE=__gnu_cxx",
+					POSIX,
+					DISABLE_DYNAMIC_CAST,
+					_REENTRANT,
+					WEBRTC_MAC,
+					WEBRTC_IOS,
+					XML_STATIC,
+					NDEBUG,
+					NVALGRIND,
+					"DYNAMIC_ANNOTATIONS_ENABLED=0",
+					"NS_BLOCK_ASSERTIONS=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				HEADER_SEARCH_PATHS = (
+					.,
+					third_party,
+					third_party/webrtc,
+					webrtc,
+					third_party/expat/files/lib,
+					third_party/jsoncpp/overrides/include/,
+					third_party/jsoncpp/source/include/,
+					third_party/libyuv/include,
+					testing/gtest/include,
+					talk/app/webrtc/objc/public,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-Wl,-search_paths_first";
+				PRODUCT_NAME = All;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wendif-labels",
+					"-Wno-unused-parameter",
+					"-Wno-missing-field-initializers",
+					"-Wheader-hygiene",
+					"-Wno-char-subscripts",
+					"-Wno-unused-function",
+					"-Wno-unnamed-type-template-args",
+					"-Wno-c++11-narrowing",
+				);
+				WARNING_CFLAGS_excluded = (
+					"-Wall",
+					"-Wextra",
+				);
+			};
+			name = Release;
+		};
+		5CDDAADA84488E8ECB493DA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INTERMEDIATE_DIR = "$(PROJECT_DERIVED_FILE_DIR)/$(CONFIGURATION)";
+				SDKROOT = iphoneos;
+				SHARED_INTERMEDIATE_DIR = "$(SYMROOT)/DerivedSources/$(CONFIGURATION)";
+				SYMROOT = ./xcodebuild;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 i386";
+			};
+			name = Debug;
+		};
+		AB874CBD5ABF75965F606ED9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INTERMEDIATE_DIR = "$(PROJECT_DERIVED_FILE_DIR)/$(CONFIGURATION)";
+				SDKROOT = iphoneos;
+				SHARED_INTERMEDIATE_DIR = "$(SYMROOT)/DerivedSources/$(CONFIGURATION)";
+				SYMROOT = ./xcodebuild;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 i386";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5953671EE5E9D932BEFB7B03 /* Build configuration list for PBXProject "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CDDAADA84488E8ECB493DA7 /* Debug */,
+				AB874CBD5ABF75965F606ED9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 1;
+			defaultConfigurationName = Debug;
+		};
+		F0E02F47130C9ABE67D4044A /* Build configuration list for PBXAggregateTarget "All" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				229D6A07D2DDAD475989C29A /* Debug */,
+				47305E3C9C5C93CCA81183D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 1;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07F667ABBAC8347BCE0D653A /* Project object */;
+}
