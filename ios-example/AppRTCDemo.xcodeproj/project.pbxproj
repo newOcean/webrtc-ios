@@ -27,6 +27,7 @@
 		2953C4B117BE129E001DA8CF /* libNetEq4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2953C4AD17BE129D001DA8CF /* libNetEq4.a */; };
 		2953C4B217BE129E001DA8CF /* libnss_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2953C4AE17BE129D001DA8CF /* libnss_static.a */; };
 		2953C4B317BE129E001DA8CF /* librbe_components.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2953C4AF17BE129D001DA8CF /* librbe_components.a */; };
+		29A1B10817C377A30012C3FF /* libwebrtc_vp8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A1B10717C377A30012C3FF /* libwebrtc_vp8.a */; };
 		4F995B31173B6937007F179A /* libaudio_coding_module.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F995B01173B6937007F179A /* libaudio_coding_module.a */; };
 		4F995B32173B6937007F179A /* libaudio_conference_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F995B02173B6937007F179A /* libaudio_conference_mixer.a */; };
 		4F995B33173B6937007F179A /* libaudio_device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F995B03173B6937007F179A /* libaudio_device.a */; };
@@ -126,6 +127,7 @@
 		2953C4AD17BE129D001DA8CF /* libNetEq4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNetEq4.a; path = libs/libNetEq4.a; sourceTree = "<group>"; };
 		2953C4AE17BE129D001DA8CF /* libnss_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnss_static.a; path = libs/libnss_static.a; sourceTree = "<group>"; };
 		2953C4AF17BE129D001DA8CF /* librbe_components.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librbe_components.a; path = libs/librbe_components.a; sourceTree = "<group>"; };
+		29A1B10717C377A30012C3FF /* libwebrtc_vp8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_vp8.a; path = libs/libwebrtc_vp8.a; sourceTree = "<group>"; };
 		4F995B01173B6937007F179A /* libaudio_coding_module.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_coding_module.a; path = libs/libaudio_coding_module.a; sourceTree = "<group>"; };
 		4F995B02173B6937007F179A /* libaudio_conference_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_conference_mixer.a; path = libs/libaudio_conference_mixer.a; sourceTree = "<group>"; };
 		4F995B03173B6937007F179A /* libaudio_device.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_device.a; path = libs/libaudio_device.a; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				29334CBA17C1E49200062CBB /* libicuuc.a in Frameworks */,
 				29334CBB17C1E49200062CBB /* libjpeg.a in Frameworks */,
 				29334CBC17C1E49200062CBB /* libsqlite_regexp.a in Frameworks */,
+				29A1B10817C377A30012C3FF /* libwebrtc_vp8.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +301,7 @@
 		4F1CC122172F52E50090479F /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				29A1B10717C377A30012C3FF /* libwebrtc_vp8.a */,
 				29334CB117C1E49200062CBB /* libcrssl.a */,
 				29334CB217C1E49200062CBB /* libicudata.a */,
 				29334CB317C1E49200062CBB /* libicui18n.a */,
