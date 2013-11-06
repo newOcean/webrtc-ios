@@ -83,6 +83,12 @@
 		4FD7F5011732E1C2009295E5 /* APPRTCAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD7F5001732E1C2009295E5 /* APPRTCAppClient.m */; };
 		4FEE3E531743C94D0005814A /* ios_channel.html in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE3E511743C92D0005814A /* ios_channel.html */; };
 		4FEE3EB71746A3810005814A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE3EB61746A3810005814A /* Icon.png */; };
+		FE680E6E182AE41900C0D516 /* libaudio_processing_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E6D182AE41900C0D516 /* libaudio_processing_neon.a */; };
+		FE680E70182AE43C00C0D516 /* libacm2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E6F182AE43C00C0D516 /* libacm2.a */; };
+		FE680E72182AE44600C0D516 /* libcommon_audio_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E71182AE44600C0D516 /* libcommon_audio_neon.a */; };
+		FE680E76182AE45F00C0D516 /* libisac_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E73182AE45F00C0D516 /* libisac_neon.a */; };
+		FE680E77182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */; };
+		FE680E78182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,6 +196,12 @@
 		4FD7F5001732E1C2009295E5 /* APPRTCAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPRTCAppClient.m; sourceTree = "<group>"; };
 		4FEE3E511743C92D0005814A /* ios_channel.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ios_channel.html; sourceTree = "<group>"; };
 		4FEE3EB61746A3810005814A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		FE680E6D182AE41900C0D516 /* libaudio_processing_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_processing_neon.a; path = libs/libaudio_processing_neon.a; sourceTree = "<group>"; };
+		FE680E6F182AE43C00C0D516 /* libacm2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacm2.a; path = libs/libacm2.a; sourceTree = "<group>"; };
+		FE680E71182AE44600C0D516 /* libcommon_audio_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcommon_audio_neon.a; path = libs/libcommon_audio_neon.a; sourceTree = "<group>"; };
+		FE680E73182AE45F00C0D516 /* libisac_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_neon.a; path = libs/libisac_neon.a; sourceTree = "<group>"; };
+		FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx_asm_offsets_vp8.a; path = libs/libvpx_asm_offsets_vp8.a; sourceTree = "<group>"; };
+		FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx_asm_offsets_vpx_scale.a; path = libs/libvpx_asm_offsets_vpx_scale.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +276,12 @@
 				29334CBB17C1E49200062CBB /* libjpeg.a in Frameworks */,
 				29334CBC17C1E49200062CBB /* libsqlite_regexp.a in Frameworks */,
 				29A1B10817C377A30012C3FF /* libwebrtc_vp8.a in Frameworks */,
+				FE680E6E182AE41900C0D516 /* libaudio_processing_neon.a in Frameworks */,
+				FE680E70182AE43C00C0D516 /* libacm2.a in Frameworks */,
+				FE680E72182AE44600C0D516 /* libcommon_audio_neon.a in Frameworks */,
+				FE680E76182AE45F00C0D516 /* libisac_neon.a in Frameworks */,
+				FE680E77182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a in Frameworks */,
+				FE680E78182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,12 +332,18 @@
 				2953C4AF17BE129D001DA8CF /* librbe_components.a */,
 				2953C4A217BE1284001DA8CF /* libcommon_audio.a */,
 				2953C4A317BE1284001DA8CF /* libcrnspr.a */,
+				FE680E73182AE45F00C0D516 /* libisac_neon.a */,
+				FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */,
+				FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */,
+				FE680E71182AE44600C0D516 /* libcommon_audio_neon.a */,
 				2953C4A417BE1284001DA8CF /* libcrnss.a */,
 				2953C4A517BE1284001DA8CF /* libcrnssckbi.a */,
+				FE680E6F182AE43C00C0D516 /* libacm2.a */,
 				2953C4A617BE1284001DA8CF /* libdesktop_capture.a */,
 				2953C49C17BE1210001DA8CF /* libvoice_engine.a */,
 				2953C49D17BE1210001DA8CF /* libvpx.a */,
 				2953C49E17BE1210001DA8CF /* libyuv.a */,
+				FE680E6D182AE41900C0D516 /* libaudio_processing_neon.a */,
 				4F995B01173B6937007F179A /* libaudio_coding_module.a */,
 				4F995B02173B6937007F179A /* libaudio_conference_mixer.a */,
 				4F995B03173B6937007F179A /* libaudio_device.a */,
@@ -617,7 +641,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "AppRTCDemo/AppRTCDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
@@ -646,7 +670,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "AppRTCDemo/AppRTCDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs\"",
