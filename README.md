@@ -38,6 +38,16 @@ My Test setup:
 - iPad 2 (iOS6) connected to Xcode 4.6.3 via debugger
 - Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
 
+Contributing
+============
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my_new_feature`)
+3. Commit your changes (`git commit -m 'Added some feature' -a`)
+4. Push to the branch (`git push origin my_new_feature`)
+5. Create a new Pull Request
+6. Please send in your changes!!
+
 Again, this code needs a lot of cleanup, so please use at own risk.  Enjoy!
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/5c7e1bbbe17ad374c801eb2e65094a02 "githalytics.com")](http://githalytics.com/gandg/webrtc-ios)
