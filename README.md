@@ -38,4 +38,7 @@ My Test setup:
 - iPad 2 (iOS6) connected to Xcode 4.6.3 via debugger
 - Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
 
+Again, this code needs a lot of cleanup, so please use at own risk.  Enjoy!
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/5c7e1bbbe17ad374c801eb2e65094a02 "githalytics.com")](http://githalytics.com/gandg/webrtc-ios)
 
