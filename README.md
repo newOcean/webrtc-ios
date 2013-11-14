@@ -19,7 +19,7 @@ UPDATE 11/14/13:
 - Now video and audio are both full duplex
 - Code is very ugly, needs to be cleaned up, to repeat, CODE IS A HACK and needs clean up
 - Big thanks to [Bridger Maxwell] (http://www.bridgermaxwell.com) for the webRTC objC video code - totally could not be done without his help, THANK YOU!
-- This [thread](https://groups.google.com/forum/#!msg/discuss-webrtc/vBD_A7gY9Io/I5YFux--6HgJ)
+- This [thread](https://groups.google.com/forum/#!msg/discuss-webrtc/vBD_A7gY9Io/I5YFux--6HgJ) on google groups was VERY, VERY helpful
 - These libraries are the key to bringing video to life:
     - ios-example/libs/libjingle.a
     - ios-example/libs/libjingle_media.a
