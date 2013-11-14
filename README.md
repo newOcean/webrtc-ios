@@ -38,9 +38,7 @@ My Test setup:
 - iPad 2 (iOS6) connected to Xcode 4.6.3 via debugger
 - Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
 
-Contributing
-============
-
+Contributing:
 1. Fork it
 2. Create your feature branch (`git checkout -b my_new_feature`)
 3. Commit your changes (`git commit -m 'Added some feature' -a`)
