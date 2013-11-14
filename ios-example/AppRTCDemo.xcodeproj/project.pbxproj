@@ -83,12 +83,15 @@
 		4FD7F5011732E1C2009295E5 /* APPRTCAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD7F5001732E1C2009295E5 /* APPRTCAppClient.m */; };
 		4FEE3E531743C94D0005814A /* ios_channel.html in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE3E511743C92D0005814A /* ios_channel.html */; };
 		4FEE3EB71746A3810005814A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE3EB61746A3810005814A /* Icon.png */; };
+		FE2A3867182D981300E10046 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2A3866182D981300E10046 /* OpenGLES.framework */; };
+		FE2A3869182D989D00E10046 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2A3868182D989D00E10046 /* QuartzCore.framework */; };
 		FE680E6E182AE41900C0D516 /* libaudio_processing_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E6D182AE41900C0D516 /* libaudio_processing_neon.a */; };
 		FE680E70182AE43C00C0D516 /* libacm2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E6F182AE43C00C0D516 /* libacm2.a */; };
 		FE680E72182AE44600C0D516 /* libcommon_audio_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E71182AE44600C0D516 /* libcommon_audio_neon.a */; };
 		FE680E76182AE45F00C0D516 /* libisac_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E73182AE45F00C0D516 /* libisac_neon.a */; };
 		FE680E77182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */; };
 		FE680E78182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */; };
+		FEB64CBC1834112C00922B14 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB64CBB1834102C00922B14 /* VideoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -196,12 +199,16 @@
 		4FD7F5001732E1C2009295E5 /* APPRTCAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPRTCAppClient.m; sourceTree = "<group>"; };
 		4FEE3E511743C92D0005814A /* ios_channel.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ios_channel.html; sourceTree = "<group>"; };
 		4FEE3EB61746A3810005814A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		FE2A3866182D981300E10046 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FE2A3868182D989D00E10046 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FE680E6D182AE41900C0D516 /* libaudio_processing_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_processing_neon.a; path = libs/libaudio_processing_neon.a; sourceTree = "<group>"; };
 		FE680E6F182AE43C00C0D516 /* libacm2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacm2.a; path = libs/libacm2.a; sourceTree = "<group>"; };
 		FE680E71182AE44600C0D516 /* libcommon_audio_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcommon_audio_neon.a; path = libs/libcommon_audio_neon.a; sourceTree = "<group>"; };
 		FE680E73182AE45F00C0D516 /* libisac_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_neon.a; path = libs/libisac_neon.a; sourceTree = "<group>"; };
 		FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx_asm_offsets_vp8.a; path = libs/libvpx_asm_offsets_vp8.a; sourceTree = "<group>"; };
 		FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx_asm_offsets_vpx_scale.a; path = libs/libvpx_asm_offsets_vpx_scale.a; sourceTree = "<group>"; };
+		FEB64CBA1834102C00922B14 /* VideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoView.h; path = "../../../video_webrtc-ios/ios-example/AppRTCDemo/VideoView.h"; sourceTree = "<group>"; };
+		FEB64CBB1834102C00922B14 /* VideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VideoView.m; path = "../../../video_webrtc-ios/ios-example/AppRTCDemo/VideoView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +216,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE2A3869182D989D00E10046 /* QuartzCore.framework in Frameworks */,
+				FE2A3867182D981300E10046 /* OpenGLES.framework in Frameworks */,
 				2945DB3517C21D60004BEFD1 /* libsqlite3.dylib in Frameworks */,
 				2945DB3317C21D25004BEFD1 /* libstdc++.dylib in Frameworks */,
 				4F995B91173C03A1007F179A /* AudioToolbox.framework in Frameworks */,
@@ -389,6 +398,8 @@
 		4FBCC0421728E929004C8C0B = {
 			isa = PBXGroup;
 			children = (
+				FE2A3868182D989D00E10046 /* QuartzCore.framework */,
+				FE2A3866182D981300E10046 /* OpenGLES.framework */,
 				2945DB3417C21D60004BEFD1 /* libsqlite3.dylib */,
 				2945DB3217C21D25004BEFD1 /* libstdc++.dylib */,
 				4FBCC0541728E929004C8C0B /* AppRTCDemo */,
@@ -424,6 +435,8 @@
 		4FBCC0541728E929004C8C0B /* AppRTCDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FEB64CBA1834102C00922B14 /* VideoView.h */,
+				FEB64CBB1834102C00922B14 /* VideoView.m */,
 				2945DAFF17C20E24004BEFD1 /* public */,
 				4FBCC0711729B780004C8C0B /* GAEChannelClient.h */,
 				4FBCC0721729B780004C8C0B /* GAEChannelClient.m */,
@@ -518,6 +531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB64CBC1834112C00922B14 /* VideoView.m in Sources */,
 				4FBCC05B1728E929004C8C0B /* main.m in Sources */,
 				4FBCC05F1728E929004C8C0B /* APPRTCAppDelegate.m in Sources */,
 				4FBCC0681728E929004C8C0B /* APPRTCViewController.m in Sources */,
@@ -649,6 +663,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -678,6 +693,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};

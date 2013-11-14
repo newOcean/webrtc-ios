@@ -90,6 +90,7 @@
     if ([method compare:@"onopen"] == NSOrderedSame) {
       [self.delegate onOpen];
     } else if ([method compare:@"onmessage"] == NSOrderedSame) {
+      NSLog(@"here in OnMessage");
       [self.delegate onMessage:message];
     } else if ([method compare:@"onclose"] == NSOrderedSame) {
       [self.delegate onClose];

@@ -26,13 +26,28 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+//#import <AssetsLibrary/AssetsLibrary.h>
+#import "RTCVideoRenderer.h"
+#import "VideoView.h"
 
 // The view controller that is displayed when AppRTCDemo is loaded.
-@interface APPRTCViewController : UIViewController<UITextFieldDelegate>
+@interface APPRTCViewController : UIViewController<UITextFieldDelegate, AVCaptureFileOutputRecordingDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UITextView *textInstructions;
 @property (weak, nonatomic) IBOutlet UITextView *textOutput;
+
+@property (strong, nonatomic) AVCaptureSession *captureSession;
+@property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
+@property (strong, nonatomic) AVCaptureDeviceInput *audioInput;
+@property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
+
+@property (weak, nonatomic) IBOutlet UIButton *captureButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
+@property (weak, nonatomic) RTCVideoRenderer *videoRenderer;
+@property (strong, nonatomic) VideoView *videoView;
+
 
 - (void)displayText:(NSString *)text;
 - (void)resetUI;

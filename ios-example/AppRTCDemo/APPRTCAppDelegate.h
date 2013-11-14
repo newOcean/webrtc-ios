@@ -30,6 +30,7 @@
 #import "GAEChannelClient.h"
 #import "APPRTCAppClient.h"
 #import "RTCSessionDescriptonDelegate.h"
+#import "RTCVideoTrack.h"
 
 // Used to send a message to an apprtc.appspot.com "room".
 @protocol APPRTCSendMessage<NSObject>
@@ -52,5 +53,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) APPRTCViewController *viewController;
+@property (nonatomic, strong)  RTCVideoTrack *localVideoTrack;
 
 @end

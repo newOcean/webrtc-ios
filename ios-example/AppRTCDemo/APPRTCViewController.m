@@ -26,6 +26,10 @@
  */
 
 #import "APPRTCViewController.h"
+#import "APPRTCAppDelegate.h"
+#import "RTCVideoRenderer.h"
+#import "VideoView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface APPRTCViewController ()
 
@@ -36,10 +40,15 @@
 @synthesize textField = _textField;
 @synthesize textInstructions = _textInstructions;
 @synthesize textOutput = _textOutput;
+@synthesize videoRenderer = _videoRenderer;
+@synthesize videoView = _videoView;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.textField.delegate = self;
+
+  [self setVideoCapturer];
+
   [self.textField becomeFirstResponder];
 }
 
@@ -84,5 +93,96 @@
   [textField resignFirstResponder];
   return YES;
 }
+
+
+
+#if 1
+- (void *)setVideoCapturer {
+
+    //---------------------------------
+	//----- SETUP CAPTURE SESSION -----
+	//---------------------------------
+#if 0
+	NSLog(@"Setting up capture session");
+    self.captureSession = [[AVCaptureSession alloc] init];
+	
+
+	//----- ADD INPUTS -----
+	NSLog(@"Adding video input");
+	
+	//ADD VIDEO INPUT
+	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	if (device)
+	{
+		NSError *error;
+		self.videoInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+		if (!error)
+		{
+			if ([self.captureSession canAddInput:self.videoInput])
+				[self.captureSession addInput:self.videoInput];
+			else
+				NSLog(@"Couldn't add video input");
+		}
+		else
+		{
+			NSLog(@"Couldn't create video input");
+		}
+	}
+	else
+	{
+		NSLog(@"Couldn't create video capture device");
+	}
+	
+	//ADD AUDIO INPUT
+	//NSLog(@"Adding audio input");
+	//AVCaptureDevice *audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+	//NSError *error = nil;
+	//AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
+	//if (audioInput)
+	//{
+	//	[captureSession addInput:audioInput];
+    //	}
+
+    //----- SET THE IMAGE QUALITY / RESOLUTION -----
+	//Options:
+	//	AVCaptureSessionPresetHigh - Highest recording quality (varies per device)
+	self.captureSession.sessionPreset = AVCaptureSessionPresetLow; // AVCaptureSessionPresetMedium; // - Suitable for WiFi sharing (actual values may change)
+	//	AVCaptureSessionPresetLow - Suitable for 3G sharing (actual values may change)
+	//	AVCaptureSessionPreset640x480 - 640x480 VGA (check its supported before setting it)
+	//	AVCaptureSessionPreset1280x720 - 1280x720 720p HD (check its supported before setting it)
+	//	AVCaptureSessionPresetPhoto - Full photo resolution (not supported for video output)
+    
+	NSLog(@"Setting image quality");
+	if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset352x288] ) //]AVCaptureSessionPreset640x480])
+        //Check size based configs are supported before setting them
+		[self.captureSession setSessionPreset:AVCaptureSessionPreset352x288]; //AVCaptureSessionPreset640x480];
+
+    AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
+    UIView *aView = self.view;
+    previewLayer.frame = CGRectMake(200, 400, self.view.frame.size.width, self.view.frame.size.height-140);
+#endif
+    
+    //** This places the VideoView window on the screen at this location, change to move around
+    CGRect frame = CGRectMake(0, 220, self.view.frame.size.width, self.view.frame.size.height-140);
+    _videoView = [[VideoView alloc] initWithFrame:frame];
+    //[aView.layer addSublayer:previewLayer];
+    //** show video view on screen
+    [self.view addSubview:_videoView];
+
+    //UIView *rv = [RTCVideoRenderer newRenderViewWithFrame:previewLayer.frame];
+    //_videoRenderer = [_videoView RTCVideoRenderer alloc] initWithRenderView:rv];
+    
+
+    
+    //APPRTCAppDelegate *ad = (APPRTCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    //[[ad localVideoTrack] addRenderer:_videoRenderer];
+
+
+    //----- START THE CAPTURE SESSION RUNNING -----
+	[self.captureSession startRunning];
+    
+}
+#endif
+
 
 @end

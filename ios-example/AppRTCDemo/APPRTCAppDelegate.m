@@ -37,16 +37,27 @@
 #import "RTCPeerConnectionDelegate.h"
 #import "RTCPeerConnectionFactory.h"
 #import "RTCSessionDescription.h"
+#import "RTCVideoRenderer.h"
+#import "RTCVideoCapturer.h"
+#import "RTCVideoTrack.h"
+#import "VideoView.h"
+
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface PCObserver : NSObject<RTCPeerConnectionDelegate>
 
 - (id)initWithDelegate:(id<APPRTCSendMessage>)delegate;
+@property(nonatomic, strong)  VideoView *videoView;
+
 
 @end
 
 @implementation PCObserver {
   id<APPRTCSendMessage> _delegate;
 }
+@synthesize videoView = _videoView;
+
 
 - (id)initWithDelegate:(id<APPRTCSendMessage>)delegate {
   if (self = [super init]) {
@@ -71,15 +82,21 @@
   dispatch_async(dispatch_get_main_queue(), ^(void) {
     NSAssert([stream.audioTracks count] >= 1,
              @"Expected at least 1 audio stream");
-    //NSAssert([stream.videoTracks count] >= 1,
-    //         @"Expected at least 1 video stream");
-    // TODO(hughv): Add video support
+
+    NSAssert([stream.videoTracks count] >= 1,
+             @"Expected at least 1 video stream");
+      
+    if ([stream.videoTracks count] > 0) {
+        [[self videoView] renderVideoTrackInterface:[stream.videoTracks objectAtIndex:0]];
+        //[[self delegate] whiteboardConnection:self renderRemoteVideo:[stream.videoTracks objectAtIndex:0]];
+    }
   });
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
          removedStream:(RTCMediaStream *)stream {
   NSLog(@"PCO onRemoveStream.");
+    [stream removeVideoTrack:[stream.videoTracks objectAtIndex:0]];
   // TODO(hughv): Remove video track.
 }
 
@@ -138,6 +155,7 @@
 @property(nonatomic, strong) RTCPeerConnectionFactory *peerConnectionFactory;
 @property(nonatomic, strong) NSMutableArray *queuedRemoteCandidates;
 
+
 @end
 
 @implementation APPRTCAppDelegate
@@ -149,12 +167,17 @@
 @synthesize peerConnection = _peerConnection;
 @synthesize peerConnectionFactory = _peerConnectionFactory;
 @synthesize queuedRemoteCandidates = _queuedRemoteCandidates;
+@synthesize localVideoTrack = _localVideoTrack;
+
 
 #pragma mark - UIApplicationDelegate methods
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [RTCPeerConnectionFactory initializeSSL];
+    
+  //RTCVideoTrack *_localVideoTrack = [[RTCVideoTrack alloc] init:nil];
+    
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.viewController =
       [[APPRTCViewController alloc] initWithNibName:@"APPRTCViewController"
@@ -183,6 +206,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
 
+//**********************
+//**********************
+//**
+//**
 - (BOOL)application:(UIApplication *)application
               openURL:(NSURL *)url
     sourceApplication:(NSString *)sourceApplication
@@ -210,34 +237,132 @@
 
 #pragma mark - ICEServerDelegate method
 
+//**********************
+//**********************
+//**
+//**
 - (void)onICEServers:(NSArray *)servers {
+    
+  //RTCICEServer *server = [[RTCICEServer alloc] initWithURI:[NSURL URLWithString:@"turn:127.0.0.1:3478"] username:@"username" password:@"password"];
+    
+  RTCMediaConstraints *_constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@[[[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"], [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"]] optionalConstraints:@[[[RTCPair alloc] initWithKey:@"internalSctpDataChannels" value:@"true"], [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"true"]]];
+        
+#if 0
+    [self setConnection:[_peerConnectionFactory peerConnectionWithICEServers:@[server] constraints:_constraints delegate:self]];
+    [self setQueuedRemoteCandidates:[NSMutableArray array]];
+        
+    RTCMediaStream *lms = [self.peerConnectionFactory mediaStreamWithLabel:@"Understudy"];
+        
+    [lms addAudioTrack:[self.peerConnectionFactory audioTrackWithID:@"Understudya0"]];
+     NSLog(@"videoDebug: Adding local video track to peer connection %@", [self localVideoTrack]);
+     if ([self localVideoTrack]) {
+          [lms addVideoTrack:[self localVideoTrack]];
+      }
+        [[self connection] addStream:lms constraints:_constraints];
+    }
+    
+
+- (void)startLocalVideo {
+        if (!_localVideoTrack) {
+            NSString *frontCameraID = nil;
+            for (AVCaptureDevice *captureDevice in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] ) {
+                if (!frontCameraID || captureDevice.position == AVCaptureDevicePositionFront) {
+                    frontCameraID = [captureDevice localizedName];
+                }
+            }
+            
+            if (frontCameraID) { // This is nil on the simulator
+                [self setVideoSource:[self.peerConnectionFactory videoSourceWithCapturer:[RTCVideoCapturer capturerWithDeviceName:frontCameraID] constraints:nil]];
+                [self setLocalVideoTrack:[self.peerConnectionFactory videoTrackWithID:@"Understudyv0" source:_videoSource]];
+                
+                NSLog(@"videodebug: new local video track %p", [self localVideoTrack]);
+                [[self delegate] whiteboardConnection:self newLocalVideoTrack:[self localVideoTrack]];
+            }
+        }
+    }
+    
+- (void)stopLocalVideo {
+        if ([self localVideoTrack]) {
+            [[self delegate] whiteboardConnection:self newLocalVideoTrack:nil];
+            
+            [self setLocalVideoTrack:nil];
+            [self setVideoSource:nil];
+        }
+    }
+#endif
+
   self.queuedRemoteCandidates = [NSMutableArray array];
   self.peerConnectionFactory = [[RTCPeerConnectionFactory alloc] init];
-  RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] init];
+  //RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] init];
   self.pcObserver = [[PCObserver alloc] initWithDelegate:self];
   self.peerConnection =
       [self.peerConnectionFactory peerConnectionWithICEServers:servers
-                                                   constraints:constraints
+                                                   constraints:_constraints
                                                       delegate:self.pcObserver];
   RTCMediaStream *lms =
       [self.peerConnectionFactory mediaStreamWithLabel:@"ARDAMS"];
   // TODO(hughv): Add video.
-  [lms addAudioTrack:[self.peerConnectionFactory audioTrackWithID:@"ARDAMSa0"]];
-  //[lms addVideoTrack:[self.peerConnectionFactory videoTrackWithID:@"ARDAMSv0"]];
-  [self.peerConnection addStream:lms constraints:constraints];
+    NSLog(@"Adding Audio and Video devices ...");
+    [lms addAudioTrack:[self.peerConnectionFactory audioTrackWithID:@"ARDAMSa0"]];
+    
+#if 1
+    NSString *frontCameraID = nil;
+    //AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //frontCameraID = [captureDevice localizedName];
+    for (AVCaptureDevice *captureDevice in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] ) {
+        if (!frontCameraID || captureDevice.position == AVCaptureDevicePositionFront) {
+            frontCameraID = [captureDevice localizedName];
+        }
+    }
+    
+//        [self setVideoSource:[self.peerConnectionFactory videoSourceWithCapturer:[RTCVideoCapturer capturerWithDeviceName:frontCameraID] constraints:nil]];
+//        [self setLocalVideoTrack:[self.peerConnectionFactory videoTrackWithID:@"Understudyv0" source:_videoSource]];
+  //      [[self delegate] whiteboardConnection:self newLocalVideoTrack:[self localVideoTrack]];
+    
+    //  http://code.google.com/p/webrtc/issues/detail?id=2246
+
+    RTCVideoCapturer *capturer = [RTCVideoCapturer capturerWithDeviceName:frontCameraID];
+    RTCVideoSource *videoSource = [self.peerConnectionFactory videoSourceWithCapturer:capturer constraints:nil];
+    //_localVideoTrack = [self.peerConnectionFactory videoTrackWithID:@"ARDAMSv0" source:videoSource];
+    [self setLocalVideoTrack:[self.peerConnectionFactory videoTrackWithID:@"ARDAMSv0" source:videoSource]];
+    if ([self localVideoTrack]) {
+        [lms addVideoTrack:[self localVideoTrack]];
+    }
+
+    //** this adds the local camera video feed to the view as a preview
+    //[self.viewController.videoView renderVideoTrackInterface:[self localVideoTrack]];
+
+    //** pass the videoView to the observer, for later rendering
+    self.pcObserver.videoView = self.viewController.videoView;
+
+    // [[self localVideoTrack] addRenderer:self.viewController.videoRenderer];
+#endif
+  [self.peerConnection addStream:lms constraints:_constraints];
+
+
   [self displayLogMessage:@"onICEServers - add local stream."];
+  NSLog(@"Adding Audio and Video devices ... DONE");
+
+   // VideoView *vv = [[VideoView alloc] init];
+    //self.window.rootViewController = vv;
+   // [self.window makeKeyAndVisible];
+
 }
 
 #pragma mark - GAEMessageHandler methods
 
+//**********************
+//**********************
+//**
+//**
 - (void)onOpen {
   [self displayLogMessage:@"GAE onOpen - create offer."];
   RTCPair *audio =
       [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"];
   // TODO(hughv): Add video.
-  RTCPair *video = [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo"
-                                          value:@"true"];
-  NSArray *mandatory = @[ audio, video ];
+  RTCPair *video = 
+    [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"];
+    NSArray *mandatory = @[ audio , video ];
   RTCMediaConstraints *constraints =
       [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory
                                             optionalConstraints:nil];
@@ -245,8 +370,13 @@
   [self displayLogMessage:@"PC - createOffer."];
 }
 
+//**********************
+//**********************
+//**
+//**
 - (void)onMessage:(NSString *)data {
   [self displayLogMessage:@"*** HERE in onMEssage"];
+    
   NSString *message = [self unHTMLifyString:data];
   NSError *error;
   NSDictionary *objects = [NSJSONSerialization
@@ -257,6 +387,7 @@
            @"%@",
            [NSString stringWithFormat:@"Error: %@", error.description]);
   NSAssert([objects count] > 0, @"Invalid JSON object");
+    
   NSString *value = [objects objectForKey:@"type"];
   [self displayLogMessage:
           [NSString stringWithFormat:@"GAE onMessage type - %@", value]];
@@ -278,8 +409,7 @@
     NSString *sdpString = [objects objectForKey:@"sdp"];
     RTCSessionDescription *sdp = [[RTCSessionDescription alloc]
         initWithType:value sdp:[APPRTCAppDelegate preferISAC:sdpString]];
-    [self.peerConnection setRemoteDescriptionWithDelegate:self
-                                       sessionDescription:sdp];
+    [self.peerConnection setRemoteDescriptionWithDelegate:self sessionDescription:sdp];
     [self displayLogMessage:@"PC - setRemoteDescription."];
   } else if ([value compare:@"bye"] == NSOrderedSame) {
     [self disconnect];
@@ -293,14 +423,25 @@
   [self disconnect];
 }
 
+int cnt = 0;
 - (void)onError:(int)code withDescription:(NSString *)description {
   [self displayLogMessage:
-          [NSString stringWithFormat:@"GAE onError:  %@", description]];
-  [self disconnect];
+          [NSString stringWithFormat:@"GAE onError %d:  %@", cnt, description]];
+  NSLog(@"XXXXX onERROR ...");
+    
+  if (++cnt > 1) {
+    NSLog(@"XXXXX onERROR CNT > 1 disconnecting ...");
+    [self disconnect];
+  }
 }
+
 
 #pragma mark - RTCSessionDescriptonDelegate methods
 
+//**********************
+//**********************
+//**
+//**
 // Match |pattern| to |string| and return the first group of the first
 // match, or nil if no match was found.
 + (NSString *)firstMatch:(NSRegularExpression *)pattern
@@ -314,6 +455,10 @@
   return [string substringWithRange:[result rangeAtIndex:1]];
 }
 
+//**********************
+//**********************
+//**
+//**
 // Mangle |origSDP| to prefer the ISAC/16k audio codec.
 + (NSString *)preferISAC:(NSString *)origSDP {
   int mLineIndex = -1;
@@ -364,6 +509,11 @@
   return [newLines componentsJoinedByString:@"\n"];
 }
 
+
+//**********************
+//**********************
+//**
+//**
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didCreateSessionDescription:(RTCSessionDescription *)origSdp
                           error:(NSError *)error {
@@ -395,6 +545,10 @@
   });
 }
 
+//**********************
+//**********************
+//**
+//**
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didSetSessionDescriptionWithError:(NSError *)error {
   if (error) {
@@ -409,12 +563,18 @@
     if (self.peerConnection.remoteDescription) {
       [self displayLogMessage:@"SDP onSuccess - drain candidates"];
       [self drainRemoteCandidates];
+    } else {
+        NSLog(@"*** self.peerConnection.remoteDescription is NULL");
     }
   });
 }
 
 #pragma mark - internal methods
 
+//**********************
+//**********************
+//**
+//**
 - (void)disconnect {
   [self.client
       sendData:[@"{\"type\": \"bye\"}" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -427,6 +587,10 @@
   [RTCPeerConnectionFactory deinitializeSSL];
 }
 
+//**********************
+//**********************
+//**
+//**
 - (void)drainRemoteCandidates {
   for (RTCICECandidate *candidate in self.queuedRemoteCandidates) {
     [self.peerConnection addICECandidate:candidate];
@@ -434,6 +598,10 @@
   self.queuedRemoteCandidates = nil;
 }
 
+//**********************
+//**********************
+//**
+//**
 - (NSString *)unHTMLifyString:(NSString *)base {
   // TODO(hughv): Investigate why percent escapes are being added.  Removing
   // them isn't necessary on Android.
@@ -455,69 +623,5 @@
                                                      withString:@"\\"];
   return removeBackslash;
 }
-
-#if 0
-- (void *)getVideoCapturer {
-
-    //---------------------------------
-	//----- SETUP CAPTURE SESSION -----
-	//---------------------------------
-	NSLog(@"Setting up capture session");
-	//CaptureSession = [[AVCaptureSession alloc] init];
-	
-	//----- ADD INPUTS -----
-	NSLog(@"Adding video input");
-	
-	//ADD VIDEO INPUT
-	AVCaptureDevice *VideoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-	if (VideoDevice)
-	{
-		NSError *error;
-		VideoInputDevice = [AVCaptureDeviceInput deviceInputWithDevice:VideoDevice error:&error];
-		if (!error)
-		{
-			if ([CaptureSession canAddInput:VideoInputDevice])
-				[CaptureSession addInput:VideoInputDevice];
-			else
-				NSLog(@"Couldn't add video input");
-		}
-		else
-		{
-			NSLog(@"Couldn't create video input");
-		}
-	}
-	else
-	{
-		NSLog(@"Couldn't create video capture device");
-	}
-	
-	//ADD AUDIO INPUT
-	NSLog(@"Adding audio input");
-	AVCaptureDevice *audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-	NSError *error = nil;
-	AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
-	if (audioInput)
-	{
-		[CaptureSession addInput:audioInput];
-	}
-
-    //----- SET THE IMAGE QUALITY / RESOLUTION -----
-	//Options:
-	//	AVCaptureSessionPresetHigh - Highest recording quality (varies per device)
-	//	AVCaptureSessionPresetMedium - Suitable for WiFi sharing (actual values may change)
-	//	AVCaptureSessionPresetLow - Suitable for 3G sharing (actual values may change)
-	//	AVCaptureSessionPreset640x480 - 640x480 VGA (check its supported before setting it)
-	//	AVCaptureSessionPreset1280x720 - 1280x720 720p HD (check its supported before setting it)
-	//	AVCaptureSessionPresetPhoto - Full photo resolution (not supported for video output)
-	NSLog(@"Setting image quality");
-	[CaptureSession setSessionPreset:AVCaptureSessionPresetMedium];
-	if ([CaptureSession canSetSessionPreset:AVCaptureSessionPreset640x480])		//Check size based configs are supported before setting them
-		[CaptureSession setSessionPreset:AVCaptureSessionPreset640x480];
-
-
-    //----- START THE CAPTURE SESSION RUNNING -----
-	[CaptureSession startRunning];
-}
-#endif
 
 @end

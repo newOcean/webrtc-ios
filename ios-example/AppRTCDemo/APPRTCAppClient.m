@@ -80,7 +80,7 @@
 }
 
 - (void)sendData:(NSData *)data {
-  //NSLog(@"*** HERE in sendData 000");
+  NSLog(@"*** HERE in sendData 000");
   @synchronized(self) {
     [self maybeLogMessage:@"Send message"];
     [self.sendQueue addObject:[data copy]];
@@ -160,7 +160,7 @@
 }
 
 - (void)sendData:(NSData *)data withUrl:(NSString *)url {
-  //NSLog(@"*** HERE in sendData 111");
+  NSLog(@"*** HERE in sendData 111");
   NSMutableURLRequest *request =
       [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
   request.HTTPMethod = @"POST";
