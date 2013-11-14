@@ -17,14 +17,25 @@ To Run example:
 UPDATE 11/14/13:
 - Video support added!
 - Now video and audio are both full duplex
-- Code is very ugly, needs to be cleaned up
+- Code is very ugly, needs to be cleaned up, to repeat, CODE IS A HACK and needs clean up
 - Big thanks to [Bridger Maxwell] (http://www.bridgermaxwell.com) for the webRTC objC video code - totally could not be done without his help, THANK YOU!
 - This [thread](https://groups.google.com/forum/#!msg/discuss-webrtc/vBD_A7gY9Io/I5YFux--6HgJ)
-
+- These libraries are the key to bringing video to life:
+    - ios-example/libs/libjingle.a
+    - ios-example/libs/libjingle_media.a
+    - ios-example/libs/libjingle_peerconnection_objc.a
+    - ios-example/libs/libvideo_render_module.a
 
 TO build the libs yourself:
-- Copy the webrtc_obj files into this dir <projdir>/trunk/talk/app/webrtc/objc
+- Copy the webrtc_obj files into this dir ...projdir.../trunk/talk/app/webrtc/objc
 - build the AppRTCDemo: wrios && gclient runhooks && ninja -C out_ios/Debug AppRTCDemo
-- copy libs into Xcode build cp <projdir>/trunk/out_ios/Debug/libvideo_render_module.a <projdir>/ios_app/webrtc-ios/ios-example/libs
+- copy libs into Xcode build cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
+
+My Test setup:
+- MacBook Pro wih OSX 10.7
+- Chrome browser connected to apprtc.appspot.com
+- iPad 2 (iOS6) connected to Xcode 4.6.3 via debugger
+
+- Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
 
 
