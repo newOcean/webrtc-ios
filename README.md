@@ -30,12 +30,12 @@ TO build the libs yourself:
 - Copy the webrtc_obj files into this dir ...projdir.../trunk/talk/app/webrtc/objc
 - build the AppRTCDemo: wrios && gclient runhooks && ninja -C out_ios/Debug AppRTCDemo
 - copy libs into Xcode build cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
+- I am not using the trunk dir provided in this repo.  Using the google one instead.
 
 My Test setup:
 - MacBook Pro wih OSX 10.7
 - Chrome browser connected to apprtc.appspot.com
 - iPad 2 (iOS6) connected to Xcode 4.6.3 via debugger
-
 - Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
 
 
