@@ -39,12 +39,12 @@ My Test setup:
 - Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
 
 Contributing:
-1. Fork it
-2. Create your feature branch (`git checkout -b my_new_feature`)
-3. Commit your changes (`git commit -m 'Added some feature' -a`)
-4. Push to the branch (`git push origin my_new_feature`)
-5. Create a new Pull Request
-6. Please send in your changes!!
+- Fork it
+- Create your feature branch (`git checkout -b my_new_feature`)
+- Commit your changes (`git commit -m 'Added some feature' -a`)
+- Push to the branch (`git push origin my_new_feature`)
+- Create a new Pull Request
+- Please send in your changes!!
 
 Again, this code needs a lot of cleanup, so please use at own risk.  Enjoy!
 
