@@ -48,5 +48,5 @@ Contributing:
 
 Again, this code needs a lot of cleanup, so please use at own risk.  Enjoy!
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/5c7e1bbbe17ad374c801eb2e65094a02 "githalytics.com")](http://githalytics.com/gandg/webrtc-ios)
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/915416e9106d19e5a8805c7ff9f27f61 "githalytics.com")](http://githalytics.com/gandg/webrtc-ios)
 
