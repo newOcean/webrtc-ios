@@ -1,7 +1,12 @@
 //
 //  VideoView.h
 //
-//
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
 
 #import <UIKit/UIKit.h>
 #import "RTCVideoTrack.h"

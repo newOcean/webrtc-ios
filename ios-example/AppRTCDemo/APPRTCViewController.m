@@ -25,6 +25,13 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
+
 #import "APPRTCViewController.h"
 #import "APPRTCAppDelegate.h"
 #import "RTCVideoRenderer.h"
@@ -97,7 +104,7 @@
 
 
 #if 1
-- (void *)setVideoCapturer {
+- (void)setVideoCapturer {
 
     //---------------------------------
 	//----- SETUP CAPTURE SESSION -----
@@ -169,10 +176,9 @@
     //** show video view on screen
     [self.view addSubview:_videoView];
 
+    //** if interested in adding a self view  to your video conference app
     //UIView *rv = [RTCVideoRenderer newRenderViewWithFrame:previewLayer.frame];
     //_videoRenderer = [_videoView RTCVideoRenderer alloc] initWithRenderView:rv];
-    
-
     
     //APPRTCAppDelegate *ad = (APPRTCAppDelegate *)[[UIApplication sharedApplication] delegate];
     //[[ad localVideoTrack] addRenderer:_videoRenderer];

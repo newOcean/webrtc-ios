@@ -25,6 +25,13 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
+
 #import "GAEChannelClient.h"
 
 #import "RTCPeerConnectionFactory.h"

@@ -1,13 +1,17 @@
 //
 //  VideoView.m
 //
-//
-//
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
+
 
 #import "VideoView.h"
 
 #import "RTCVideoRenderer.h"
-///#import "UIImage+Additions.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface VideoView () {
@@ -130,7 +134,7 @@ static void init(VideoView *self) {
         [self resume:self];
     }
     //** flip the video over
-    [self setVideoOrientation:UIInterfaceOrientationPortraitUpsideDown];
+    [self setVideoOrientation:UIInterfaceOrientationLandscapeLeft];
 }
 
 -(void)pause:(id)sender {
