@@ -17,7 +17,7 @@ To Run example:
 UPDATE 11/14/13:
 - Video support added!
 - Now video and audio are both full duplex
-- Code is very ugly, needs to be cleaned up, to repeat, CODE IS A HACK and needs clean up
+- Code is not ideal, needs to be cleaned up, to repeat, CODE IS A HACK and needs clean up
 - Big thanks to [Bridger Maxwell] (http://www.bridgermaxwell.com) for the webRTC objC video code - totally could not be done without his help, THANK YOU!
 - This [thread](https://groups.google.com/forum/#!msg/discuss-webrtc/vBD_A7gY9Io/I5YFux--6HgJ) on google groups was VERY, VERY helpful
 - These libraries are the key to bringing video to life:
@@ -26,7 +26,13 @@ UPDATE 11/14/13:
     - ios-example/libs/libjingle_peerconnection_objc.a
     - ios-example/libs/libvideo_render_module.a
 
-TO build the libs yourself:
+To build XCode iOS app only:
+- project location: webrtc-ios/ios-example/AppRTCDemo.xcodeproj 
+- Open the XCode project and set target for iPad 
+- Build and run
+- Should work without changes
+
+To build the video and jingle libs yourself, then XCode iOS app:
 - Copy the webrtc_obj files into this dir ...projdir.../trunk/talk/app/webrtc/objc
 - build the AppRTCDemo: wrios && gclient runhooks && ninja -C out_ios/Debug AppRTCDemo
 - copy libs into Xcode build cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
