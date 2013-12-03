@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		186CA7591836D3DB00CE8212 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186CA7581836D3DB00CE8212 /* VideoView.m */; };
 		29334CB717C1E49200062CBB /* libcrssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29334CB117C1E49200062CBB /* libcrssl.a */; };
 		29334CB817C1E49200062CBB /* libicudata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29334CB217C1E49200062CBB /* libicudata.a */; };
 		29334CB917C1E49200062CBB /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29334CB317C1E49200062CBB /* libicui18n.a */; };
@@ -91,10 +92,11 @@
 		FE680E76182AE45F00C0D516 /* libisac_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E73182AE45F00C0D516 /* libisac_neon.a */; };
 		FE680E77182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */; };
 		FE680E78182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */; };
-		FEB64CBC1834112C00922B14 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB64CBB1834102C00922B14 /* VideoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		186CA7571836D3DB00CE8212 /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
+		186CA7581836D3DB00CE8212 /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
 		29334CB117C1E49200062CBB /* libcrssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrssl.a; path = libs/libcrssl.a; sourceTree = "<group>"; };
 		29334CB217C1E49200062CBB /* libicudata.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicudata.a; path = libs/libicudata.a; sourceTree = "<group>"; };
 		29334CB317C1E49200062CBB /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libicui18n.a; path = libs/libicui18n.a; sourceTree = "<group>"; };
@@ -207,8 +209,6 @@
 		FE680E73182AE45F00C0D516 /* libisac_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_neon.a; path = libs/libisac_neon.a; sourceTree = "<group>"; };
 		FE680E74182AE45F00C0D516 /* libvpx_asm_offsets_vp8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx_asm_offsets_vp8.a; path = libs/libvpx_asm_offsets_vp8.a; sourceTree = "<group>"; };
 		FE680E75182AE45F00C0D516 /* libvpx_asm_offsets_vpx_scale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx_asm_offsets_vpx_scale.a; path = libs/libvpx_asm_offsets_vpx_scale.a; sourceTree = "<group>"; };
-		FEB64CBA1834102C00922B14 /* VideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoView.h; path = "../../../video_webrtc-ios/ios-example/AppRTCDemo/VideoView.h"; sourceTree = "<group>"; };
-		FEB64CBB1834102C00922B14 /* VideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VideoView.m; path = "../../../video_webrtc-ios/ios-example/AppRTCDemo/VideoView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,8 +435,8 @@
 		4FBCC0541728E929004C8C0B /* AppRTCDemo */ = {
 			isa = PBXGroup;
 			children = (
-				FEB64CBA1834102C00922B14 /* VideoView.h */,
-				FEB64CBB1834102C00922B14 /* VideoView.m */,
+				186CA7571836D3DB00CE8212 /* VideoView.h */,
+				186CA7581836D3DB00CE8212 /* VideoView.m */,
 				2945DAFF17C20E24004BEFD1 /* public */,
 				4FBCC0711729B780004C8C0B /* GAEChannelClient.h */,
 				4FBCC0721729B780004C8C0B /* GAEChannelClient.m */,
@@ -531,11 +531,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEB64CBC1834112C00922B14 /* VideoView.m in Sources */,
 				4FBCC05B1728E929004C8C0B /* main.m in Sources */,
 				4FBCC05F1728E929004C8C0B /* APPRTCAppDelegate.m in Sources */,
 				4FBCC0681728E929004C8C0B /* APPRTCViewController.m in Sources */,
 				4FBCC0731729B780004C8C0B /* GAEChannelClient.m in Sources */,
+				186CA7591836D3DB00CE8212 /* VideoView.m in Sources */,
 				4FD7F5011732E1C2009295E5 /* APPRTCAppClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
