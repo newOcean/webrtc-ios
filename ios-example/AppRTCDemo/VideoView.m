@@ -27,12 +27,12 @@
 
 @implementation VideoView
 
-#define VIDEO_WIDTH 240
-#define VIDEO_HEIGHT 180
+#define VIDEO_WIDTH 320
+#define VIDEO_HEIGHT 640
 
 static void init(VideoView *self) {
     
-    //** not sure if this frame isze does anything...
+    //** not sure if this frame size does anything...
     UIView<RTCVideoRenderView> *renderView = [RTCVideoRenderer newRenderViewWithFrame:CGRectMake(200, 100, 240, 180)];
     [self setRenderView:renderView];
     UIImageView *placeholderView = [[UIImageView alloc] initWithFrame:[renderView frame]];
@@ -54,7 +54,8 @@ static void init(VideoView *self) {
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:renderView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
 
-    [[self layer] setCornerRadius:VIDEO_HEIGHT/2.0];
+    //** rounded corners of frame
+    // [[self layer] setCornerRadius:VIDEO_HEIGHT/2.0];
     [[self layer] setMasksToBounds:YES];
     [self setBackgroundColor:[UIColor redColor]];
 
@@ -91,7 +92,7 @@ static void init(VideoView *self) {
 
 -(CGSize)intrinsicContentSize {
     // We add a bit of a buffer to keep the video from showing out of our border
-    CGFloat borderSize = [[self layer] borderWidth];
+    CGFloat borderSize = 0; //[[self layer] borderWidth];
     return CGSizeMake(VIDEO_HEIGHT + borderSize - 1, VIDEO_HEIGHT + borderSize - 1);
 }
 
@@ -135,8 +136,61 @@ static void init(VideoView *self) {
     }
     //** flip the video over
     [self setVideoOrientation:UIInterfaceOrientationLandscapeLeft];
+    [self setVideoOrientation:UIInterfaceOrientationPortrait];
+    [self setVideoOrientation:UIInterfaceOrientationLandscapeLeft];
 }
 
+#if 0
+- (void)orientationChanged:(NSNotification *)notification
+{
+        UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+        CGRect rect = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+        
+        
+        switch (deviceOrientation) {
+            case 1:
+                [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationDuration:0.1];
+                self.view.transform = CGAffineTransformMakeRotation(0);
+                self.view.bounds = [[UIScreen mainScreen] bounds];
+                [UIView commitAnimations];
+                break;
+            case 2:
+                [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortraitUpsideDown animated:NO];
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationDuration:0.1];
+                self.view.transform = CGAffineTransformMakeRotation(-M_PI);
+                self.view.bounds = [[UIScreen mainScreen] bounds];
+                [UIView commitAnimations];
+                break;
+            case 3:
+                [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
+                //rect = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationDuration:0.1];
+                self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
+                self.view.bounds = rect;
+                [UIView commitAnimations];
+                break;
+            case 4:
+                [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationDuration:0.1];
+                //rect = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+                self.view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+                self.view.bounds = rect;
+                [UIView commitAnimations];
+                break;
+                
+            default:
+                break;
+        }
+}
+#endif
+      
+      
+      
 -(void)pause:(id)sender {
     [_renderer stop];
 }

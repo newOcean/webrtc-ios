@@ -53,11 +53,54 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.textField.delegate = self;
-
-  [self setVideoCapturer];
-
-  [self.textField becomeFirstResponder];
+    
+  self.textField.keyboardType = UIKeyboardTypeNumberPad;
+    
+  UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+  numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+  numberToolbar.items = [NSArray arrayWithObjects:
+                         [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                         [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                         [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
+                         nil];
+  [numberToolbar sizeToFit];
+  self.textField.inputAccessoryView = numberToolbar;
+    
+  if ([self connectedToInternet] == NO) {
+      NSLog(@"NO INTERNET connection!");
+  }
 }
+
+-(void)cancelNumberPad{
+    [self.textField resignFirstResponder];
+    self.textField.text = @"";
+}
+
+- (BOOL) connectedToInternet
+{
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"]];
+    return ( URLString != NULL ) ? YES : NO;
+}
+
+-(void)doneWithNumberPad {
+    //**
+    //** this overides the textFieldDidEndEditing delegate below
+    NSString *numberFromTheKeyboard = self.textField.text;
+    [self.textField resignFirstResponder];
+    
+    NSString *room = numberFromTheKeyboard;
+    if ([room length] == 0) {
+        return;
+    }
+    
+    NSString *url =
+        [NSString stringWithFormat:@"apprtc://apprtc.appspot.com/?r=%@", room];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    
+    //** launch Video View
+    [self setVideoCapturer];
+}
+
 
 - (void)displayText:(NSString *)text {
   dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -78,6 +121,10 @@
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+#if 0
+  //**
+  //** see doneWithNumberPad above
+
   NSString *room = textField.text;
   if ([room length] == 0) {
     return;
@@ -92,6 +139,7 @@
   NSString *url =
       [NSString stringWithFormat:@"apprtc://apprtc.appspot.com/?r=%@", room];
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+#endif
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -153,16 +201,16 @@
     //----- SET THE IMAGE QUALITY / RESOLUTION -----
 	//Options:
 	//	AVCaptureSessionPresetHigh - Highest recording quality (varies per device)
-	self.captureSession.sessionPreset = AVCaptureSessionPresetLow; // AVCaptureSessionPresetMedium; // - Suitable for WiFi sharing (actual values may change)
+	//self.captureSession.sessionPreset = AVCaptureSessionPresetLow; // AVCaptureSessionPresetMedium; // - Suitable for WiFi sharing (actual values may change)
 	//	AVCaptureSessionPresetLow - Suitable for 3G sharing (actual values may change)
-	//	AVCaptureSessionPreset640x480 - 640x480 VGA (check its supported before setting it)
+	self.captureSession.sessionPreset = AVCaptureSessionPreset640x480; // - 640x480 VGA (check its supported before setting it)
 	//	AVCaptureSessionPreset1280x720 - 1280x720 720p HD (check its supported before setting it)
 	//	AVCaptureSessionPresetPhoto - Full photo resolution (not supported for video output)
     
 	NSLog(@"Setting image quality");
-	if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset352x288] ) //]AVCaptureSessionPreset640x480])
+	if ([[self.captureSession canSetSessionPreset:AVCaptureSessionPreset640x480]) //AVCaptureSessionPreset352x288] ) //]AVCaptureSessionPreset640x480])
         //Check size based configs are supported before setting them
-		[self.captureSession setSessionPreset:AVCaptureSessionPreset352x288]; //AVCaptureSessionPreset640x480];
+		[self.captureSession setSessionPreset:AVCaptureSessionPreset640x480]) //AVCaptureSessionPreset352x288]; //AVCaptureSessionPreset640x480];
 
     AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
     UIView *aView = self.view;
@@ -170,8 +218,9 @@
 #endif
     
     //** This places the VideoView window on the screen at this location, change to move around
-    CGRect frame = CGRectMake(0, 220, self.view.frame.size.width, self.view.frame.size.height-140);
+    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-80);
     _videoView = [[VideoView alloc] initWithFrame:frame];
+    //_videoView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     //[aView.layer addSublayer:previewLayer];
     //** show video view on screen
     [self.view addSubview:_videoView];
