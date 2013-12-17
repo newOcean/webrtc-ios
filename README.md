@@ -8,7 +8,7 @@ To Run example:
 - Open a Google Chrome browser (not IE, Firefox or Safari - spent a day debugging why Firefox was not working - CHROME!!)
 - Open this URL: https://apprtc.appspot.com
 - Ensure the camera on your laptop has an image
-- Make not of the room number in the URL after loading web page
+- Make note of the room number in the URL after loading web page
 - Run the iOS app and type in the room number
 - Stand back .... Should here feedback audio between your laptop and iOS device.
 - NOTE - the audio is the only channel implemented by Google, the video render portion on iOS is not implemented yet.
@@ -26,17 +26,19 @@ UPDATE 11/14/13:
     - ios-example/libs/libjingle_peerconnection_objc.a
     - ios-example/libs/libvideo_render_module.a
 
-To build XCode iOS app only:
+To build XCode iOS app only for device (not simulator):
 - project location: webrtc-ios/ios-example/AppRTCDemo.xcodeproj 
-- Open the XCode project and set target for iPad 
+- Open the XCode project and set target for iPad / iPhone
 - Build and run
 - Should work without changes
 
-To build the video and jingle libs yourself, then XCode iOS app:
-- Copy the webrtc_obj files into this dir ...projdir.../trunk/talk/app/webrtc/objc
-- build the AppRTCDemo: wrios && gclient runhooks && ninja -C out_ios/Debug AppRTCDemo
-- copy libs into Xcode build cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
-- I am not using the trunk dir provided in this repo.  Using the google one instead.
+To build the video and jingle libs yourself, which you can then copy back into the ios-example/libs directory:
+- Download a copy of the Google WebRTC build tools and code [here](http://www.webrtc.org/reference/getting-started)
+- Copy the files in the webrtc_obj dir into this dir ...projdir.../trunk/talk/app/webrtc/objc
+- Build the AppRTCDemo target: wrios && gclient runhooks && ninja -C out_ios/Debug AppRTCDemo
+- Copy the resulting libs back into the Xcode project
+      cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
+- I am not using the trunk dir provided in this repo.  Using the Google trunk that you downloaded in step one instead.
 
 My Test setup:
 - MacBook Pro wih OSX 10.7
