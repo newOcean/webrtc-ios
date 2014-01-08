@@ -56,5 +56,23 @@ Contributing:
 
 Again, this code needs a lot of cleanup, so please use at own risk.  Enjoy!
 
+## License
+
+Copyright 2013 Gregg Ganley, All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this project source code except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/915416e9106d19e5a8805c7ff9f27f61 "githalytics.com")](http://githalytics.com/gandg/webrtc-ios)
 
