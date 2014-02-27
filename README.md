@@ -31,14 +31,16 @@ To build XCode iOS app only for device (not simulator):
 - Open the XCode project and set target for iPad / iPhone
 - Build and run
 - Should work without changes
+(webrtc branch 3.46)
 
 To build the video and jingle libs yourself, which you can then copy back into the ios-example/libs directory:
 - Download a copy of the Google WebRTC build tools and code [here](http://www.webrtc.org/reference/getting-started)
+    (webrtc branch 3.46)
 - Copy the files in the webrtc_obj dir into this dir ...projdir.../trunk/talk/app/webrtc/objc
 - Build the AppRTCDemo target: wrios && gclient runhooks && ninja -C out_ios/Debug AppRTCDemo
 - Copy the resulting libs back into the Xcode project
       cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
-- I am not using the trunk dir provided in this repo.  Using the Google trunk that you downloaded in step one instead.
+- I am not using the trunk dir provided in this repo.  Using the Google trunk that you downloaded in step one instead. 
 
 My Test setup:
 - MacBook Pro wih OSX 10.7
