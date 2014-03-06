@@ -206,6 +206,8 @@
           withTurnServer:(NSString *)turnServerUrl {
   if ([turnServerUrl length] < 1) {
     [self.ICEServerDelegate onICEServers:ICEServers];
+    
+    self.gaeChannel =  [[GAEChannelClient alloc] initWithToken:self.token delegate:self.messageHandler];
     return;
   }
   dispatch_async(self.backgroundQueue, ^(void) {
