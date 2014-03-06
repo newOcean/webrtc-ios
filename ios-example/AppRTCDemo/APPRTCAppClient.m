@@ -242,6 +242,8 @@
 
     dispatch_async(dispatch_get_main_queue(), ^(void) {
       [self.ICEServerDelegate onICEServers:ICEServers];
+      
+      self.gaeChannel =  [[GAEChannelClient alloc] initWithToken:self.token delegate:self.messageHandler];
     });
   });
 }
@@ -350,9 +352,8 @@
   [self maybeLogMessage:
           [NSString stringWithFormat:@"About to open GAE with token:  %@",
               self.token]];
-  self.gaeChannel =
-      [[GAEChannelClient alloc] initWithToken:self.token
-                                     delegate:self.messageHandler];
+  
+  //self.gaeChannel =  [[GAEChannelClient alloc] initWithToken:self.token delegate:self.messageHandler];
 }
 
 @end
