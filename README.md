@@ -43,6 +43,7 @@ To build the video and jingle libs yourself, which you can then copy back into t
 - I am not using the trunk dir provided in this repo.  Using the Google trunk that you downloaded in step one instead. 
 
 Update 4/29/14:
+ - iOS7, Mavericks, and XCode 5.1 update!!
  - Ensured my local repo was in sync with github
  - Set SDK and target device to 7.1
  - Compiled and saw over 100+ errors
