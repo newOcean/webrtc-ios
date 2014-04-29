@@ -42,11 +42,23 @@ To build the video and jingle libs yourself, which you can then copy back into t
       cp ...projdir.../trunk/out_ios/Debug/libvideo_render_module.a ...projdir.../ios_app/webrtc-ios/ios-example/libs
 - I am not using the trunk dir provided in this repo.  Using the Google trunk that you downloaded in step one instead. 
 
-My Test setup:
-- MacBook Pro wih OSX 10.7
+Update 4/29/14:
+ - Ensured my local repo was in sync with github
+ - Set SDK and target device to 7.1
+ - Compiled and saw over 100+ errors
+ - Determined that "Other Linker Flags" needed to be set to:
+       "-stdlib=libstdc++"
+ - fixed all 100+ errors
+ - URL for stun server in JSON key changed from URL to URLS, so changed parser
+ - Ran client SW on my iPhone5 running 7.1
+ - Worked!
+
+My Test setup as of 4/29/14:
+- MacBook Pro wih OSX 10.9.2
 - Chrome browser connected to apprtc.appspot.com
-- iPad 2 (iOS6) connected to Xcode 4.6.3 via debugger
+- iPhone5 (iOS7) connected to Xcode 5.1 via debugger
 - Occasionaly, I hit an issue with the TURN server not being reachable and need to re-run the app.  Some networks this is worse, e.g. home network versus work.
+ 
 
 Contributing:
 - Fork it
@@ -60,7 +72,7 @@ Again, this code needs a lot of cleanup, so please use at own risk.  Enjoy!
 
 ## License
 
-Copyright 2013 Gregg Ganley, All Rights Reserved.
+Copyright 2013, 2014 Gregg Ganley, All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this project source code except in compliance with the License.
@@ -75,6 +87,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
+[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2Fwebrtc-ios%2Fabout&_u=MAC~&cid=1757014354.1393964045&tid=UA-24755641-1)]()
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/915416e9106d19e5a8805c7ff9f27f61 "githalytics.com")](http://githalytics.com/gandg/webrtc-ios)
 
