@@ -87,7 +87,7 @@
 }
 
 - (void)sendData:(NSData *)data {
-  NSLog(@"*** HERE in sendData 000");
+  //NSLog(@"*** HERE in sendData 000");
   @synchronized(self) {
     [self maybeLogMessage:@"Send message"];
     [self.sendQueue addObject:[data copy]];
@@ -167,7 +167,7 @@
 }
 
 - (void)sendData:(NSData *)data withUrl:(NSString *)url {
-  NSLog(@"*** HERE in sendData 111");
+  //NSLog(@"*** HERE in sendData 111");
   NSMutableURLRequest *request =
       [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
   request.HTTPMethod = @"POST";
@@ -204,12 +204,16 @@
 
 - (void)updateICEServers:(NSMutableArray *)ICEServers
           withTurnServer:(NSString *)turnServerUrl {
+    
   if ([turnServerUrl length] < 1) {
     [self.ICEServerDelegate onICEServers:ICEServers];
     
     self.gaeChannel =  [[GAEChannelClient alloc] initWithToken:self.token delegate:self.messageHandler];
     return;
   }
+
+    NSLog(@"SEQ7-Updating ICE server entries");
+  
   dispatch_async(self.backgroundQueue, ^(void) {
     NSMutableURLRequest *request = [NSMutableURLRequest
         requestWithURL:[NSURL URLWithString:turnServerUrl]];
@@ -261,6 +265,7 @@
 
 - (void)connection:(NSURLConnection *)connection
     didReceiveResponse:(NSURLResponse *)response {
+    
   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
   int statusCode = [httpResponse statusCode];
   [self maybeLogMessage:
@@ -273,6 +278,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+  NSLog(@"SEQ6-Processing response from apprtc.appsopt.com");
   [self maybeLogMessage:[NSString stringWithFormat:@"finished loading %d chars",
                          [self.roomHtml length]]];
   NSRegularExpression* fullRegex =
@@ -351,9 +357,7 @@
   }
   [self updateICEServers:ICEServers withTurnServer:turnServerUrl];
 
-  [self maybeLogMessage:
-          [NSString stringWithFormat:@"About to open GAE with token:  %@",
-              self.token]];
+ // NSLog(@"SEQ7-About to open GAE with token:  %@", self.token);
   
   //self.gaeChannel =  [[GAEChannelClient alloc] initWithToken:self.token delegate:self.messageHandler];
 }

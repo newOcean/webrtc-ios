@@ -18,6 +18,7 @@
     UIInterfaceOrientation _videoOrientation;
     UIColor *_color;
     
+    
     RTCVideoTrack *_track;
     RTCVideoRenderer *_renderer;
 }
@@ -26,9 +27,10 @@
 @end
 
 @implementation VideoView
+    UILabel *loadingLabel;
 
 #define VIDEO_WIDTH 320
-#define VIDEO_HEIGHT 640
+#define VIDEO_HEIGHT 470
 
 static void init(VideoView *self) {
     
@@ -57,9 +59,45 @@ static void init(VideoView *self) {
     //** rounded corners of frame
     // [[self layer] setCornerRadius:VIDEO_HEIGHT/2.0];
     [[self layer] setMasksToBounds:YES];
-    [self setBackgroundColor:[UIColor redColor]];
+    [self setBackgroundColor:[UIColor darkGrayColor]];
+
+    
+    //** hack in LOADING text...
+    loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(32, 32, 250, 35)];
+    
+    [loadingLabel setTextColor:[UIColor whiteColor]];
+    [loadingLabel setBackgroundColor:[UIColor darkGrayColor]];
+    [loadingLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 18.0f]];
+    [loadingLabel setText:@"Loading... (tap to dismiss)"];
+    loadingLabel.center = CGPointMake(VIDEO_WIDTH/2, VIDEO_HEIGHT/2);
+    [self addSubview:loadingLabel];
+    
+    //** add tap gesture recognizer
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    recognizer.delegate = self;
+    [self addGestureRecognizer:recognizer];
 
 }
+
+
+//******************************
+//******************************
+//**
+//**  TAP
+//**
+int once = 1; //disable
+//** handle tap
+- (void)handleTap:(UITapGestureRecognizer *)recognizer {
+    
+    if (once) {
+        once = 0;
+        //** remove loading label
+        [loadingLabel removeFromSuperview];
+        return;
+    }
+}
+
+
 
 - (id)initWithFrame:(CGRect)frame
 {

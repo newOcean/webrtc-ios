@@ -93,12 +93,36 @@
         return;
     }
     
+    //** launch Video View
+    NSLog(@"SEQ2-Sending CONNECT to room # %@", room);
     NSString *url =
         [NSString stringWithFormat:@"apprtc://apprtc.appspot.com/?r=%@", room];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     
     //** launch Video View
+    NSLog(@"SEQ3-Connect button pressed ...");
     [self setVideoCapturer];
+}
+
+
+- (IBAction)disconnectPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Disconnect device?"
+                                                    message:@"Do you want to end session?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [UIApplication sharedApplication];
+        APPRTCAppDelegate *appDelegate = (APPRTCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate onClose];
+        exit(0);
+    }
 }
 
 
@@ -151,12 +175,12 @@
 
 
 
-#if 1
 - (void)setVideoCapturer {
 
     //---------------------------------
 	//----- SETUP CAPTURE SESSION -----
 	//---------------------------------
+    NSLog(@"SEQ4-Setup AppRTC video view");
 #if 0
 	NSLog(@"Setting up capture session");
     self.captureSession = [[AVCaptureSession alloc] init];
@@ -223,6 +247,7 @@
     //_videoView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     //[aView.layer addSublayer:previewLayer];
     //** show video view on screen
+    NSLog(@"SEQ5-Starting AppRTC video view and camera capture");
     [self.view addSubview:_videoView];
 
     //** if interested in adding a self view  to your video conference app
@@ -237,7 +262,6 @@
 	[self.captureSession startRunning];
     
 }
-#endif
 
 
 @end

@@ -54,6 +54,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
 @property (weak, nonatomic) RTCVideoRenderer *videoRenderer;
 @property (strong, nonatomic) VideoView *videoView;
+- (IBAction)disconnectPressed:(id)sender;
 
 
 - (void)displayText:(NSString *)text;

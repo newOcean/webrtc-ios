@@ -181,6 +181,8 @@
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+   NSLog(@"SEQ1-Welcome to AppRTC Demo App!");
   [RTCPeerConnectionFactory initializeSSL];
     
     
