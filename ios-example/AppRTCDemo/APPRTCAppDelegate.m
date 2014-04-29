@@ -25,11 +25,19 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
+ 
+
 #import "APPRTCAppDelegate.h"
 
 #import "APPRTCViewController.h"
-#import "RTCIceCandidate.h"
-#import "RTCIceServer.h"
+#import "RTCICECandidate.h"
+#import "RTCICEServer.h"
 #import "RTCMediaConstraints.h"
 #import "RTCMediaStream.h"
 #import "RTCPair.h"
@@ -37,16 +45,27 @@
 #import "RTCPeerConnectionDelegate.h"
 #import "RTCPeerConnectionFactory.h"
 #import "RTCSessionDescription.h"
+#import "RTCVideoRenderer.h"
+#import "RTCVideoCapturer.h"
+#import "RTCVideoTrack.h"
+#import "VideoView.h"
+
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface PCObserver : NSObject<RTCPeerConnectionDelegate>
 
 - (id)initWithDelegate:(id<APPRTCSendMessage>)delegate;
+@property(nonatomic, strong)  VideoView *videoView;
+
 
 @end
 
 @implementation PCObserver {
   id<APPRTCSendMessage> _delegate;
 }
+@synthesize videoView = _videoView;
+
 
 - (id)initWithDelegate:(id<APPRTCSendMessage>)delegate {
   if (self = [super init]) {
@@ -61,26 +80,31 @@
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    onSignalingStateChange:(RTCSignalingState)stateChanged {
-  NSLog(@"PCO onSignalingStateChange.");
+    signalingStateChanged:(RTCSignalingState)stateChanged {
+  NSLog(@"PCO onSignalingStateChange: %d", stateChanged);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-           onAddStream:(RTCMediaStream *)stream {
+             addedStream:(RTCMediaStream *)stream {
   NSLog(@"PCO onAddStream.");
   dispatch_async(dispatch_get_main_queue(), ^(void) {
     NSAssert([stream.audioTracks count] >= 1,
              @"Expected at least 1 audio stream");
-    //NSAssert([stream.videoTracks count] >= 1,
-    //         @"Expected at least 1 video stream");
-    // TODO(hughv): Add video support
+
+    NSAssert([stream.videoTracks count] >= 1,
+             @"Expected at least 1 video stream");
+      
+    if ([stream.videoTracks count] > 0) {
+        [[self videoView] renderVideoTrackInterface:[stream.videoTracks objectAtIndex:0]];
+        //[[self delegate] whiteboardConnection:self renderRemoteVideo:[stream.videoTracks objectAtIndex:0]];
+    }
   });
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-        onRemoveStream:(RTCMediaStream *)stream {
+         removedStream:(RTCMediaStream *)stream {
   NSLog(@"PCO onRemoveStream.");
-  // TODO(hughv): Remove video track.
+    [stream removeVideoTrack:[stream.videoTracks objectAtIndex:0]];
 }
 
 - (void)
@@ -90,8 +114,8 @@
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-        onIceCandidate:(RTCICECandidate *)candidate {
-  NSLog(@"PCO onIceCandidate.\n  Mid[%@] Index[%d] Sdp[%@]",
+       gotICECandidate:(RTCICECandidate *)candidate {
+  NSLog(@"PCO onICECandidate.\n  Mid[%@] Index[%d] Sdp[%@]",
         candidate.sdpMid,
         candidate.sdpMLineIndex,
         candidate.sdp);
@@ -111,15 +135,22 @@
   }
 }
 
-//- (void)peerConnection:(RTCPeerConnection *)peerConnection
-//    onIceGatheringChange:(RTCIceGatheringState)newState {
-//  NSLog(@"PCO onIceGatheringChange. %@", newState);
-//}
-//
-//- (void)peerConnection:(RTCPeerConnection *)peerConnection
-//    onIceConnectionChange:(RTCIceConnectionState)newState {
-//  NSLog(@"PCO onIceConnectionChange. %d", newState);
-//}
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+    iceGatheringChanged:(RTCICEGatheringState)newState {
+  NSLog(@"PCO onIceGatheringChange. %d", newState);
+}
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+    iceConnectionChanged:(RTCICEConnectionState)newState {
+  NSLog(@"PCO onIceConnectionChange. %d", newState);
+  if (newState == RTCICEConnectionConnected)
+    [self displayLogMessage:@"ICE Connection Connected."];
+  NSAssert(newState != RTCICEConnectionFailed, @"ICE Connection failed!");
+}
+
+- (void)displayLogMessage:(NSString *)message {
+  [_delegate displayLogMessage:message];
+}
 
 @end
 
@@ -131,20 +162,37 @@
 @property(nonatomic, strong) RTCPeerConnectionFactory *peerConnectionFactory;
 @property(nonatomic, strong) NSMutableArray *queuedRemoteCandidates;
 
+
 @end
 
 @implementation APPRTCAppDelegate
+
+@synthesize window = _window;
+@synthesize viewController = _viewController;
+@synthesize client = _client;
+@synthesize pcObserver = _pcObserver;
+@synthesize peerConnection = _peerConnection;
+@synthesize peerConnectionFactory = _peerConnectionFactory;
+@synthesize queuedRemoteCandidates = _queuedRemoteCandidates;
+@synthesize localVideoTrack = _localVideoTrack;
+
 
 #pragma mark - UIApplicationDelegate methods
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+   NSLog(@"SEQ1-Welcome to AppRTC Demo App!");
+  [RTCPeerConnectionFactory initializeSSL];
+    
+    
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.viewController =
       [[APPRTCViewController alloc] initWithNibName:@"APPRTCViewController"
                                              bundle:nil];
   self.window.rootViewController = self.viewController;
   [self.window makeKeyAndVisible];
+  //** [self displayLogMessage:@"*** HERE in didFinishLaunchingWithOptions !!!!!"];
   return YES;
 }
 
@@ -166,6 +214,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
 
+//**********************
+//**********************
+//**
+//**
 - (BOOL)application:(UIApplication *)application
               openURL:(NSURL *)url
     sourceApplication:(NSString *)sourceApplication
@@ -174,7 +226,7 @@
     return NO;
   }
   self.client = [[APPRTCAppClient alloc] init];
-  self.client.iceServerDelegate = self;
+  self.client.ICEServerDelegate = self;
   self.client.messageHandler = self;
   [self.client connectToRoom:url];
   return YES;
@@ -191,44 +243,114 @@
   [self.client sendData:data];
 }
 
-#pragma mark - IceServerDelegate method
+#pragma mark - ICEServerDelegate method
 
-- (void)onIceServers:(NSArray *)servers {
-  self.queuedRemoteCandidates = [NSMutableArray array];
-  self.peerConnectionFactory = [[RTCPeerConnectionFactory alloc] init];
-  RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] init];
-  self.pcObserver = [[PCObserver alloc] initWithDelegate:self];
-  self.peerConnection =
+//**********************
+//**********************
+//**
+//** Setup VIDEO and AUDIO streams here
+//**
+- (void)onICEServers:(NSArray *)servers {
+    
+    //** may need this in the future
+    //RTCICEServer *server = [[RTCICEServer alloc] initWithURI:[NSURL URLWithString:@"turn:127.0.0.1:3478"] username:@"username" password:@"password"];
+    
+    RTCMediaConstraints *_constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:@[[[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"], [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"]] optionalConstraints:@[[[RTCPair alloc] initWithKey:@"internalSctpDataChannels" value:@"true"], [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:@"true"]]];
+
+    
+    self.queuedRemoteCandidates = [NSMutableArray array];
+    self.peerConnectionFactory = [[RTCPeerConnectionFactory alloc] init];
+    self.pcObserver = [[PCObserver alloc] initWithDelegate:self];
+    self.peerConnection =
       [self.peerConnectionFactory peerConnectionWithICEServers:servers
-                                                   constraints:constraints
+                                                   constraints:_constraints
                                                       delegate:self.pcObserver];
-  RTCMediaStream *lms =
+    RTCMediaStream *lms =
       [self.peerConnectionFactory mediaStreamWithLabel:@"ARDAMS"];
-  // TODO(hughv): Add video.
-  [lms addAudioTrack:[self.peerConnectionFactory audioTrackWithID:@"ARDAMSa0"]];
- // [self.peerConnection addStream:lms withConstraints:constraints];
-    [self.peerConnection addStream:lms constraints:constraints];
-  [self displayLogMessage:@"onIceServers - add local stream."];
+    NSLog(@"Adding Audio and Video devices ...");
+    [lms addAudioTrack:[self.peerConnectionFactory audioTrackWithID:@"ARDAMSa0"]];
+    
+  
+    //**  http://code.google.com/p/webrtc/issues/detail?id=2246
+    
+    NSString *cameraID = nil;
+    //** back camera
+    //AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //cameraID = [captureDevice localizedName];
+
+    //** front camera
+    for (AVCaptureDevice *captureDevice in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] ) {
+        if (!cameraID || captureDevice.position == AVCaptureDevicePositionFront) {
+            cameraID = [captureDevice localizedName];
+        }
+    }
+    
+    RTCVideoCapturer *capturer = [RTCVideoCapturer capturerWithDeviceName:cameraID];
+    RTCVideoSource *videoSource = [self.peerConnectionFactory videoSourceWithCapturer:capturer constraints:nil];
+    [self setLocalVideoTrack:[self.peerConnectionFactory videoTrackWithID:@"ARDAMSv0" source:videoSource]];
+    if ([self localVideoTrack]) {
+        [lms addVideoTrack:[self localVideoTrack]];
+    }
+
+    //** this adds the local camera video feed to the view as a preview
+    //[self.viewController.videoView renderVideoTrackInterface:[self localVideoTrack]];
+    // [[self localVideoTrack] addRenderer:self.viewController.videoRenderer];
+    
+    //** pass the videoView to the observer, for later rendering
+    self.pcObserver.videoView = self.viewController.videoView;
+
+    //** add stream
+    [self.peerConnection addStream:lms constraints:_constraints];
+
+
+    [self displayLogMessage:@"onICEServers - add local stream."];
+    NSLog(@"Adding Audio and Video devices ... DONE");
 }
+
+#if 0
+    //** may need this in the future
+- (void)stopLocalVideo {
+        if ([self localVideoTrack]) {
+            [[self delegate] whiteboardConnection:self newLocalVideoTrack:nil];
+            
+            [self setLocalVideoTrack:nil];
+            [self setVideoSource:nil];
+        }
+    }
+#endif
+
+
 
 #pragma mark - GAEMessageHandler methods
 
+//**********************
+//**********************
+//**
+//**
 - (void)onOpen {
-  [self displayLogMessage:@"GAE onOpen - create offer."];
-  RTCPair *audio =
-      [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"];
-  // TODO(hughv): Add video.
-  //  RTCPair *video = [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo"
-  //                                          value:@"true"];
-  NSArray *mandatory = @[ audio /*, video*/ ];
-  RTCMediaConstraints *constraints =
+    [self displayLogMessage:@"GAE onOpen - create offer."];
+    
+    RTCPair *audio =
+        [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"];
+    //** video added
+    RTCPair *video =
+        [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"];
+    NSArray *mandatory = @[ audio , video ];
+
+    RTCMediaConstraints *constraints =
       [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory
                                             optionalConstraints:nil];
-  [self.peerConnection createOfferWithDelegate:self constraints:constraints];
-  [self displayLogMessage:@"PC - createOffer."];
+    [self.peerConnection createOfferWithDelegate:self constraints:constraints];
+    [self displayLogMessage:@"PC - createOffer."];
 }
 
+//**********************
+//**********************
+//**
+//**
 - (void)onMessage:(NSString *)data {
+  [self displayLogMessage:@"*** HERE in onMEssage"];
+    
   NSString *message = [self unHTMLifyString:data];
   NSError *error;
   NSDictionary *objects = [NSJSONSerialization
@@ -239,6 +361,7 @@
            @"%@",
            [NSString stringWithFormat:@"Error: %@", error.description]);
   NSAssert([objects count] > 0, @"Invalid JSON object");
+    
   NSString *value = [objects objectForKey:@"type"];
   [self displayLogMessage:
           [NSString stringWithFormat:@"GAE onMessage type - %@", value]];
@@ -258,10 +381,9 @@
   } else if (([value compare:@"offer"] == NSOrderedSame) ||
              ([value compare:@"answer"] == NSOrderedSame)) {
     NSString *sdpString = [objects objectForKey:@"sdp"];
-    RTCSessionDescription *sdp =
-        [[RTCSessionDescription alloc] initWithType:value sdp:sdpString];
-    [self.peerConnection setRemoteDescriptionWithDelegate:self
-                                       sessionDescription:sdp];
+    RTCSessionDescription *sdp = [[RTCSessionDescription alloc]
+        initWithType:value sdp:[APPRTCAppDelegate preferISAC:sdpString]];
+    [self.peerConnection setRemoteDescriptionWithDelegate:self sessionDescription:sdp];
     [self displayLogMessage:@"PC - setRemoteDescription."];
   } else if ([value compare:@"bye"] == NSOrderedSame) {
     [self disconnect];
@@ -275,28 +397,118 @@
   [self disconnect];
 }
 
+int cnt = 0;
 - (void)onError:(int)code withDescription:(NSString *)description {
   [self displayLogMessage:
-          [NSString stringWithFormat:@"GAE onError:  %@", description]];
-  [self disconnect];
+          [NSString stringWithFormat:@"GAE onError %d:  %@", cnt, description]];
+  NSLog(@"XXXXX onERROR ...");
+    
+  if (++cnt > 1) {
+    //** allow for a retry, not sure if this works
+    NSLog(@"XXXXX onERROR CNT > 1 disconnecting ...");
+    [self disconnect];
+  }
 }
+
 
 #pragma mark - RTCSessionDescriptonDelegate methods
 
+//**********************
+//**********************
+//**
+//**
+// Match |pattern| to |string| and return the first group of the first
+// match, or nil if no match was found.
++ (NSString *)firstMatch:(NSRegularExpression *)pattern
+              withString:(NSString *)string {
+  NSTextCheckingResult* result =
+    [pattern firstMatchInString:string
+                        options:0
+                          range:NSMakeRange(0, [string length])];
+  if (!result)
+    return nil;
+  return [string substringWithRange:[result rangeAtIndex:1]];
+}
+
+//**********************
+//**********************
+//**
+//**
+// Mangle |origSDP| to prefer the ISAC/16k audio codec.
++ (NSString *)preferISAC:(NSString *)origSDP {
+  int mLineIndex = -1;
+  NSString* isac16kRtpMap = nil;
+  NSArray* lines = [origSDP componentsSeparatedByString:@"\n"];
+  NSRegularExpression* isac16kRegex = [NSRegularExpression
+      regularExpressionWithPattern:@"^a=rtpmap:(\\d+) ISAC/16000[\r]?$"
+                           options:0
+                             error:nil];
+  for (int i = 0;
+       (i < [lines count]) && (mLineIndex == -1 || isac16kRtpMap == nil);
+       ++i) {
+    NSString* line = [lines objectAtIndex:i];
+    if ([line hasPrefix:@"m=audio "]) {
+      mLineIndex = i;
+      continue;
+    }
+    isac16kRtpMap = [self firstMatch:isac16kRegex withString:line];
+  }
+  if (mLineIndex == -1) {
+    NSLog(@"No m=audio line, so can't prefer iSAC");
+    return origSDP;
+  }
+  if (isac16kRtpMap == nil) {
+    NSLog(@"No ISAC/16000 line, so can't prefer iSAC");
+    return origSDP;
+  }
+  NSArray* origMLineParts =
+      [[lines objectAtIndex:mLineIndex] componentsSeparatedByString:@" "];
+  NSMutableArray* newMLine =
+      [NSMutableArray arrayWithCapacity:[origMLineParts count]];
+  int origPartIndex = 0;
+  // Format is: m=<media> <port> <proto> <fmt> ...
+  [newMLine addObject:[origMLineParts objectAtIndex:origPartIndex++]];
+  [newMLine addObject:[origMLineParts objectAtIndex:origPartIndex++]];
+  [newMLine addObject:[origMLineParts objectAtIndex:origPartIndex++]];
+  [newMLine addObject:isac16kRtpMap];
+  for (; origPartIndex < [origMLineParts count]; ++origPartIndex) {
+    if ([isac16kRtpMap compare:[origMLineParts objectAtIndex:origPartIndex]]
+        != NSOrderedSame) {
+      [newMLine addObject:[origMLineParts objectAtIndex:origPartIndex]];
+    }
+  }
+  NSMutableArray* newLines = [NSMutableArray arrayWithCapacity:[lines count]];
+  [newLines addObjectsFromArray:lines];
+  [newLines replaceObjectAtIndex:mLineIndex
+                      withObject:[newMLine componentsJoinedByString:@" "]];
+  return [newLines componentsJoinedByString:@"\n"];
+}
+
+
+//**********************
+//**********************
+//**
+//**
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    createSessionDescriptionCompleted:(RTCSessionDescription *)sdp
-                            withError:(NSError *)error {
+    didCreateSessionDescription:(RTCSessionDescription *)origSdp
+                          error:(NSError *)error {
   if (error) {
     [self displayLogMessage:@"SDP onFailure."];
     NSAssert(NO, error.description);
     return;
   }
 
-  [self displayLogMessage:@"SDP onSuccess(SDP) - set local description."];
+  [self displayLogMessage:@"SDP onSuccess(SDP) - set local description. GG"];
+  [self displayLogMessage:@"**** FOO BAR"];
+  RTCSessionDescription* sdp =
+      [[RTCSessionDescription alloc]
+          initWithType:origSdp.type
+                   sdp:[APPRTCAppDelegate preferISAC:origSdp.description]];
   [self.peerConnection setLocalDescriptionWithDelegate:self
                                     sessionDescription:sdp];
   [self displayLogMessage:@"PC setLocalDescription."];
   dispatch_async(dispatch_get_main_queue(), ^(void) {
+    [self displayLogMessage:@"*** FOOBAR"];
     NSDictionary *json = @{ @"type" : sdp.type, @"sdp" : sdp.description };
     NSError *error;
     NSData *data =
@@ -308,8 +520,12 @@
   });
 }
 
+//**********************
+//**********************
+//**
+//**
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
-    setSessionDescriptionCompletedWithError:(NSError *)error {
+    didSetSessionDescriptionWithError:(NSError *)error {
   if (error) {
     [self displayLogMessage:@"SDP onFailure."];
     NSAssert(NO, error.description);
@@ -322,23 +538,34 @@
     if (self.peerConnection.remoteDescription) {
       [self displayLogMessage:@"SDP onSuccess - drain candidates"];
       [self drainRemoteCandidates];
+    } else {
+        NSLog(@"*** self.peerConnection.remoteDescription is NULL");
     }
   });
 }
 
 #pragma mark - internal methods
 
+//**********************
+//**********************
+//**
+//**
 - (void)disconnect {
   [self.client
       sendData:[@"{\"type\": \"bye\"}" dataUsingEncoding:NSUTF8StringEncoding]];
   self.peerConnection = nil;
   self.peerConnectionFactory = nil;
   self.pcObserver = nil;
-  self.client.iceServerDelegate = nil;
+  self.client.ICEServerDelegate = nil;
   self.client.messageHandler = nil;
   self.client = nil;
+  [RTCPeerConnectionFactory deinitializeSSL];
 }
 
+//**********************
+//**********************
+//**
+//**
 - (void)drainRemoteCandidates {
   for (RTCICECandidate *candidate in self.queuedRemoteCandidates) {
     [self.peerConnection addICECandidate:candidate];
@@ -346,6 +573,10 @@
   self.queuedRemoteCandidates = nil;
 }
 
+//**********************
+//**********************
+//**
+//**
 - (NSString *)unHTMLifyString:(NSString *)base {
   // TODO(hughv): Investigate why percent escapes are being added.  Removing
   // them isn't necessary on Android.

@@ -25,6 +25,13 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
+
 #import "GAEChannelClient.h"
 
 #import "RTCPeerConnectionFactory.h"
@@ -38,8 +45,12 @@
 
 @implementation GAEChannelClient
 
+@synthesize delegate = _delegate;
+@synthesize webView = _webView;
+
 - (id)initWithToken:(NSString *)token delegate:(id<GAEMessageHandler>)delegate {
   self = [super init];
+  [self displayLogMessage:@"*** HERE IN initWithToken"];
   if (self) {
     _webView = [[UIWebView alloc] init];
     _webView.delegate = self;
@@ -67,6 +78,7 @@
 - (BOOL)webView:(UIWebView *)webView
     shouldStartLoadWithRequest:(NSURLRequest *)request
                 navigationType:(UIWebViewNavigationType)navigationType {
+  [self displayLogMessage:@"*** HERE IN GAE webview"];
   NSString *scheme = [request.URL scheme];
   if ([scheme compare:@"js-frame"] != NSOrderedSame) {
     return YES;
@@ -85,6 +97,7 @@
     if ([method compare:@"onopen"] == NSOrderedSame) {
       [self.delegate onOpen];
     } else if ([method compare:@"onmessage"] == NSOrderedSame) {
+      NSLog(@"here in OnMessage");
       [self.delegate onMessage:message];
     } else if ([method compare:@"onclose"] == NSOrderedSame) {
       [self.delegate onClose];
@@ -101,4 +114,7 @@
   return YES;
 }
 
+- (void)displayLogMessage:(NSString *)message {
+  NSLog(@"%@", message);
+}
 @end

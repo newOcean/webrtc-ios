@@ -25,17 +25,26 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ *
+ * Last updated by: Gregg Ganley
+ * Nov 2013
+ *
+ */
+
 #import <UIKit/UIKit.h>
 
 #import "GAEChannelClient.h"
 #import "APPRTCAppClient.h"
 #import "RTCSessionDescriptonDelegate.h"
+#import "RTCVideoTrack.h"
 
 // Used to send a message to an apprtc.appspot.com "room".
 @protocol APPRTCSendMessage<NSObject>
 
 - (void)sendData:(NSData *)data;
-
+// Logging helper.
+- (void)displayLogMessage:(NSString *)message;
 @end
 
 @class APPRTCViewController;
@@ -43,11 +52,14 @@
 // The main application class of the AppRTCDemo iOS app demonstrating
 // interoperability between the Objcective C implementation of PeerConnection
 // and the apprtc.appspot.com demo webapp.
-@interface APPRTCAppDelegate : UIResponder<IceServerDelegate,
-    GAEMessageHandler, APPRTCSendMessage, RTCSessionDescriptonDelegate,
-    UIApplicationDelegate>
+@interface APPRTCAppDelegate : UIResponder<ICEServerDelegate,
+                                           GAEMessageHandler,
+                                           APPRTCSendMessage,
+                                           RTCSessionDescriptonDelegate,
+                                           UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) APPRTCViewController *viewController;
+@property (nonatomic, strong)  RTCVideoTrack *localVideoTrack;
 
 @end
