@@ -74,7 +74,7 @@
     _backgroundQueue = dispatch_queue_create("RTCBackgroundQueue", NULL);
     _sendQueue = [NSMutableArray array];
     // Uncomment to see Request/Response logging.
-    // _verboseLogging = YES;
+    _verboseLogging = YES;
   }
   return self;
 }
@@ -329,7 +329,7 @@
   NSArray *servers = [json objectForKey:@"iceServers"];
   NSMutableArray *ICEServers = [NSMutableArray array];
   for (NSDictionary *server in servers) {
-    NSString *url = [server objectForKey:@"url"];
+    NSString *url = [server objectForKey:@"urls"];
     NSString *username = json[@"username"];
     NSString *credential = [server objectForKey:@"credential"];
     if (!username) {
