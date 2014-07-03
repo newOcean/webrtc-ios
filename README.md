@@ -1,3 +1,10 @@
+!!!!
+PLEASE refer the latest version 
+https://github.com/newOcean/AppRTCDemo-Ocean.git
+
+-----------------------------------------------------
+
+
 project on ios platform.
 
 There is so many people wanting to use webrtc on ios, But nobody give a completely building project.
