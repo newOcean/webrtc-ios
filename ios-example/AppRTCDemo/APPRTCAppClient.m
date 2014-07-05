@@ -292,7 +292,10 @@
     [self showMessage:@"Room full"];
     return;
   }
-
+    
+    NSString *jsonString = self.roomHtml;
+    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
 
   NSString *fullUrl = [[[connection originalRequest] URL] absoluteString];
   NSRange queryRange = [fullUrl rangeOfString:@"?"];
@@ -300,27 +303,32 @@
   [self maybeLogMessage:
       [NSString stringWithFormat:@"Base URL: %@", self.baseURL]];
 
-  self.token = [self findVar:@"channelToken" strippingQuotes:YES];
+  //self.token = [self findVar:@"channelToken" strippingQuotes:YES];
+    NSLog(@"%@",jsonDic);
+    self.token = [jsonDic objectForKey:@"token"];
   if (!self.token)
     return;
   [self maybeLogMessage:[NSString stringWithFormat:@"Token: %@", self.token]];
 
-  NSString* roomKey = [self findVar:@"roomKey" strippingQuotes:YES];
-  NSString* me = [self findVar:@"me" strippingQuotes:YES];
+    NSString *roomKey = [jsonDic objectForKey:@"room_key"]; //[self findVar:@"roomKey" strippingQuotes:YES];
+    NSString *me = [jsonDic objectForKey:@"me"]; //[self findVar:@"me" strippingQuotes:YES];
   if (!roomKey || !me)
     return;
-  self.postMessageUrl =
+    [self maybeLogMessage:[NSString stringWithFormat:@"roomKey: %@", roomKey]];
+    [self maybeLogMessage:[NSString stringWithFormat:@"me: %@", me]];
+  
+    self.postMessageUrl =
     [NSString stringWithFormat:@"/message?r=%@&u=%@", roomKey, me];
   [self maybeLogMessage:[NSString stringWithFormat:@"POST message URL: %@",
                                   self.postMessageUrl]];
 
-  NSString* pcConfig = [self findVar:@"pcConfig" strippingQuotes:NO];
+  NSString* pcConfig = [jsonDic objectForKey:@"pc_config"];//[self findVar:@"pcConfig" strippingQuotes:NO];
   if (!pcConfig)
     return;
   [self maybeLogMessage:
           [NSString stringWithFormat:@"PC Config JSON: %@", pcConfig]];
 
-  NSString *turnServerUrl = [self findVar:@"turnUrl" strippingQuotes:YES];
+    NSString *turnServerUrl = [jsonDic objectForKey:@"turn_url"];//[self findVar:@"turnUrl" strippingQuotes:YES];
   if (turnServerUrl) {
     [self maybeLogMessage:
             [NSString stringWithFormat:@"TURN server request URL: %@",
