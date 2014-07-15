@@ -96,7 +96,7 @@
     //** launch Video View
     NSLog(@"SEQ2-Sending CONNECT to room # %@", room);
     NSString *url =
-        [NSString stringWithFormat:@"apprtc://apprtc.appspot.com/?r=%@", room];
+        [NSString stringWithFormat:@"apprtc://apprtc.appspot.com/?r=%@&t=json", room];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     
     //** launch Video View
